@@ -1,0 +1,7 @@
+{
+  "name": "panasonicApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
