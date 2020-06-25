@@ -3,15 +3,13 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
-  /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary: #f24537;
+  --ion-color-primary-rgb: 242, 69, 55;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #d53d30;
+  --ion-color-primary-tint: #f3584b;
 
-  /** secondary **/
   --ion-color-secondary: #3dc2ff;
   --ion-color-secondary-rgb: 61, 194, 255;
   --ion-color-secondary-contrast: #ffffff;
@@ -19,13 +17,12 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-secondary-shade: #36abe0;
   --ion-color-secondary-tint: #50c8ff;
 
-  /** tertiary **/
-  --ion-color-tertiary: #5260ff;
-  --ion-color-tertiary-rgb: 82, 96, 255;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
+  --ion-color-tertiary: #c5a43e;
+  --ion-color-tertiary-rgb: 197, 164, 62;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #ad9037;
+  --ion-color-tertiary-tint: #cbad51;
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -243,11 +240,83 @@ http://ionicframework.com/docs/theming/ */
   src: url("/assets/fonts/Tajawal-Bold.ttf");
 }
 
+ion-content.reg-bg {
+  --background: url(../images/register_bg.jpg) no-repeat center center / cover;
+}
+
+.land-bg {
+  --background: url(../images/land_bg.jpg) no-repeat center center / cover;
+}
+
+.login-bg {
+  --background: url(../images/login_bg.jpg) no-repeat center center / cover;
+}
+
+.user-home-bg {
+  position: relative;
+}
+
+.top-bg {
+  background: url(../images/banner.png) no-repeat bottom center / cover;
+  width: 100%;
+  height: 25vh;
+  top: auto;
+  left: 0px;
+  right: 0px;
+  position: absolute;
+  z-index: 0;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 32px;
+  padding: 16px;
+  top: auto;
+  left: 0px;
+  right: 0px;
+  position: absolute;
+}
+
+.user_profile_img {
+  background: #eee;
+  width: 140px;
+  height: 140px;
+  margin: auto;
+  margin-top: 2vh;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 8px solid #c5a43e;
+  display: inline-flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.user-avatar {
+  position: relative;
+  margin-top: 10vh;
+}
+
 .title {
   text-align: center;
   color: var(--pana-titles-color);
   font-family: "Tajawal";
-  font-size: 2em;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+  margin: 1em auto;
+  height: 2px;
+  background-color: white;
+}
+
+.divider-dark {
+  margin: 1em 2.5em;
+  height: 2px;
+  background-color: #c3b8b8;
+  box-shadow: 3px 1.5px 2px rgba(182, 30, 30, 0.3);
 }
 
 .reg-element {
@@ -255,20 +324,87 @@ http://ionicframework.com/docs/theming/ */
   padding: 0.3rem;
 }
 
+ion-button.reg-btn {
+  --border-radius: 2em;
+  --box-shadow: 0px 14px 25px rgba(182, 30, 30, 0.59);
+  width: 90%;
+  margin: 2px auto;
+  font-size: 1.1rem;
+  text-align: center;
+  font-family: "Tajawal";
+}
+
+ion-button.light-btn {
+  --border-radius: 2em;
+  --box-shadow: 0px 2px 2px rgba(182, 30, 30, 0.3);
+  width: 90%;
+  margin: 2px auto;
+  font-size: 1.1rem;
+  text-align: center;
+  font-family: "Tajawal";
+}
+
+ion-button.land-btn {
+  text-transform: initial;
+}
+
 .reg-input {
+  --placeholder-color: var(--pana-titles-color);
+  --placeholder-opacity: 0.9;
   background: rgba(0, 0, 0, 0.28);
   padding: 0.7rem 1rem;
   border-radius: 2rem;
   border: 1.5px solid #dff;
   color: var(--pana-titles-color);
   width: 90%;
+  margin: 2px auto;
   font-size: 1.1rem;
   text-align: center;
 }
 
-.reg-input:focus {
+.footer-btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+ion-input.reg-input:focus {
   outline: none;
   border-color: #c1f371;
+  border: 1.5px solid #c1f371;
+}
+
+.offers-home-bg ion-card {
+  width: 90%;
+  margin: 1em;
+  text-align: center;
+}
+
+.offers-home-bg ion-card img {
+  max-width: 45%;
+  margin: 1em auto;
+}
+
+.main-toolbar {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.menu-toolbar {
+  padding: 16px 0;
+}
+
+.fullh {
+  height: 100vh;
+}
+.intro-slide {
+  position: relative;
+}
+
+.intro-slide-btn {
+  top: 85vh;
+  left: 0px;
+  right: 0px;
+  position: absolute;
 }
 
 ::placeholder {

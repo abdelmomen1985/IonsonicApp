@@ -1,12 +1,11 @@
-import { IonContent, IonPage, IonButton } from "@ionic/react";
+import { IonContent } from "@ionic/react";
 import React from "react";
+import LandingSelect from "../components/LandingSelect";
 //import ExploreContainer from "../components/ExploreContainer";
-import "./Home.css";
-import RegisterForm from "../components/RegisterForm";
 
 const Home: React.FC = () => {
   return (
-    <IonPage>
+    <>
       {/*
       <IonHeader>
         <IonToolbar>
@@ -14,7 +13,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       */}
-      <IonContent className="reg-bg">
+      <IonContent className="land-bg">
         {/*
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -22,11 +21,14 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer />
-        */}
+        
         <RegisterForm />
+
         <IonButton routerLink="/slider">Slider</IonButton>
+        */}
+        <LandingSelect />
       </IonContent>
-    </IonPage>
+    </>
   );
 };
 
