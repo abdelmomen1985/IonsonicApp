@@ -45,7 +45,7 @@ export default function Profile() {
       </IonHeader>
       <IonContent>
         <div className="ion-text-center">
-          <div className="user_profile_img">
+          <div className="avatar-img">
             <label htmlFor="file-input">
               {userData.ProfileImage ? (
                 <img

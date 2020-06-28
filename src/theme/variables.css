@@ -278,7 +278,7 @@ ion-content.reg-bg {
   position: absolute;
 }
 
-.user_profile_img {
+.avatar-img {
   background: #eee;
   width: 140px;
   height: 140px;
@@ -293,6 +293,7 @@ ion-content.reg-bg {
   justify-content: center;
   overflow: hidden;
 }
+
 .user-avatar {
   position: relative;
   margin-top: 10vh;

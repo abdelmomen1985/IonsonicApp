@@ -1,6 +1,8 @@
 const english = {
   main: {
     home: "Home",
+    branches: "Branches",
+    choose_area: "Choose Area",
     my_transactions: "My Transactions",
     my_vouchers: "My Vouchers",
     my_gifts: "My Gifts",
@@ -8,6 +10,10 @@ const english = {
     notifications: "Notifications",
     change_langauge: "Change Langauge",
     get_started: "Get Started",
+    complaint: "Complaint",
+    speak: "Speak to us",
+    inquery: "Inquery",
+    previous_work: "Previous Work",
   },
   slider: {
     next: "Next",

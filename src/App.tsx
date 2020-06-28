@@ -38,6 +38,8 @@ import SideInfo from "./pages/side/SideInfo";
 import Notifications from "./pages/Notifications";
 import UserTransactions from "./pages/UserTransactions";
 import { AppCtxt } from "./Context";
+import BranchesMap from "./pages/BranchesMap";
+import SingleMap from "./pages/SingleMap";
 
 const App: React.FC = () => {
   const { currentLang } = useContext(AppCtxt);
@@ -58,6 +60,8 @@ const App: React.FC = () => {
             <Route path="/welcome" component={Welcome} />
             <Route path="/user_home" component={UserHome} />
             <Route path="/offers" component={Offers} />
+            <Route path="/branches" component={BranchesMap} />
+            <Route path="/area_map/:areaId" component={SingleMap} />
             <Route path="/redeem_ctg" component={RedeemCtg} />
             <Route path="/notifications" component={Notifications} />
             <Route path="/transactions" component={UserTransactions} />

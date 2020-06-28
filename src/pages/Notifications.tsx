@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import config from "../config";
+import React, { useEffect, useContext } from "react";
 import {
   IonPage,
   IonContent,
@@ -7,10 +6,8 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonCard,
   IonIcon,
   IonButtons,
-  IonText,
 } from "@ionic/react";
 import Footer from "../components/Footer";
 

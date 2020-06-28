@@ -39,22 +39,32 @@ export default function RedeemCtg() {
       </IonHeader>
       <IonContent className="redeem-ctg-bg">
         <IonCard className="ion-text-center">
-          <img src={panasonic} alt="" style={{ maxWidth: "80%" }} />
-          <IonCardTitle color="tertiary">Panasonic Products</IonCardTitle>
+          <img src={panasonic} alt="" style={{ maxWidth: "65%" }} />
+          <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
+            Panasonic Products
+          </IonCardTitle>
         </IonCard>
 
         <IonCard className="ion-text-center">
-          <img src={gifts} alt="" style={{ maxWidth: "80%", margin: "1em" }} />
-          <IonCardTitle color="tertiary">Gifts </IonCardTitle>
+          <img
+            src={gifts}
+            alt=""
+            style={{ maxWidth: "80%", marginTop: ".5em" }}
+          />
+          <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
+            Gifts{" "}
+          </IonCardTitle>
         </IonCard>
 
         <IonCard className="ion-text-center">
           <img
             src={vouchers}
             alt=""
-            style={{ maxWidth: "80%", margin: "1em" }}
+            style={{ maxWidth: "80%", marginTop: ".5em" }}
           />
-          <IonCardTitle color="tertiary">Vouchers</IonCardTitle>
+          <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
+            Vouchers
+          </IonCardTitle>
         </IonCard>
       </IonContent>
       <Footer current="redeem_ctg" />

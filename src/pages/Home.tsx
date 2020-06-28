@@ -2,6 +2,7 @@ import { IonContent, IonPage } from "@ionic/react";
 import React, { useEffect } from "react";
 import LandingSelect from "../components/LandingSelect";
 import { useHistory } from "react-router-dom";
+import { bugy } from "../utils/functions";
 
 //import ExploreContainer from "../components/ExploreContainer";
 
@@ -10,6 +11,7 @@ const Home: React.FC = () => {
   const userData = localStorage.getItem("UserData");
 
   useEffect(() => {
+    bugy("Loading Home");
     if (userData) {
       history.push("/slider");
     }

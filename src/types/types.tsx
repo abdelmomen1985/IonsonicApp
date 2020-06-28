@@ -26,3 +26,10 @@ export type OfferType = {
   OriginalPrice: number;
   PriceWithDiscount: number;
 };
+
+export type AreaType = {
+  Id: number;
+  Name: string;
+  Longitude: number;
+  Latitude: number;
+};

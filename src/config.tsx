@@ -1,6 +1,7 @@
 const config = {
   API_URL: "http://13.90.214.197:881/api/",
   PROXY_POST: "http://13.90.214.197:8081/hrback/public/api/",
+  // TODO: make them dynamic [later]
   LANG_CODES: {
     ar: {
       code: "ar",
@@ -21,6 +22,20 @@ const config = {
     ur: {
       code: "ur",
       id: 5,
+    },
+  },
+  contact_us_types: {
+    1: {
+      ar_name: "أستعلام",
+      en_name: "Inquiry",
+    },
+    2: {
+      ar_name: "شكوي",
+      en_name: "Complaint",
+    },
+    3: {
+      ar_name: "سابقة أعمال",
+      en_name: "PreviousWork",
     },
   },
 };

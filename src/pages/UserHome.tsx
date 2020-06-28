@@ -40,7 +40,7 @@ export default function UserHome() {
             <div>
               <IonText color="light">First</IonText>
             </div>
-            <div className="user_profile_img">
+            <div className="avatar-img">
               {user?.ProfileImage ? (
                 <img
                   src={user.ProfileImage}

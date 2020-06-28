@@ -4,6 +4,7 @@ import EveryHeader from "../../components/EveryHeader";
 import { strings } from "../../localization/localization";
 import { AppCtxt } from "../../Context";
 import SelectLangModal from "../../components/SelectLangModal";
+import Footer from "../../components/Footer";
 
 export default function Settings() {
   const { currentLang } = useContext(AppCtxt);
@@ -45,6 +46,7 @@ export default function Settings() {
             {strings.main.change_langauge}
           </IonButton>
         </div>
+        <Footer current="" />
       </IonPage>
     </>
   );

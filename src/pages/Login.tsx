@@ -32,9 +32,9 @@ export default function Login() {
   const handleSubmit = useCallback(async (e: SyntheticEvent) => {
     e.preventDefault();
     const goHome = () => {
-      bugy("goHome");
       let user = JSON.parse(localStorage.getItem("UserData")!);
       setUserData(user);
+      JSON.parse(localStorage.getItem("UserData")!);
       history.push("/user_home");
     };
     const { email, password } = e.target as any;

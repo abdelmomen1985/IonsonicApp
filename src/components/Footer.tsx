@@ -44,7 +44,13 @@ export default function Footer({ current }: FooterProps) {
               color={current === "redeem_ctg" ? "tertiary" : "medium"}
             />
           </IonButton>
-          <IonIcon slot="icon-only" icon={locationOutline} color="medium" />
+          <IonButton routerLink="/branches">
+            <IonIcon
+              color={current === "branches" ? "tertiary" : "medium"}
+              slot="icon-only"
+              icon={locationOutline}
+            />
+          </IonButton>
           <IonButton routerLink="/offers">
             <IonIcon
               slot="icon-only"

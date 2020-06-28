@@ -1,6 +1,8 @@
 const arabic = {
   main: {
     home: "الرئيسية",
+    branches: "الفروع",
+    choose_area: "اختر المنطقة",
     my_transactions: "المعاملات الاخيرة",
     my_vouchers: "القسائم المتاحة",
     my_gifts: "الهديا المتاحة",
@@ -8,6 +10,10 @@ const arabic = {
     notifications: "الاشعارات",
     change_langauge: "تغيير اللغة",
     get_started: " البـدء",
+    complaint: "شكوي",
+    speak: "تحدث إلينا",
+    inquery: "استعلام",
+    previous_work: "سابقة أعمال",
   },
   slider: {
     next: "التالي",

@@ -12,6 +12,10 @@
 - Synicing app with capacitor `npx cap copy`
 - Open IDE / Studio `npx cap open android`
 
+## inspect remotely
+
+- chrome://inspect/#devices
+
 ## Online link
 
 https://appetize.io/app/d5m38kjcdvbuwk21ax76y4c6x4?device=pixel4&scale=75&orientation=portrait&osVersion=10.0&deviceColor=black
