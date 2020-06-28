@@ -1,11 +1,36 @@
-import { IonContent } from "@ionic/react";
-import React from "react";
+import { IonContent, IonPage } from "@ionic/react";
+import React, { useEffect } from "react";
 import LandingSelect from "../components/LandingSelect";
+import { useHistory } from "react-router-dom";
+
 //import ExploreContainer from "../components/ExploreContainer";
 
 const Home: React.FC = () => {
+  const history = useHistory();
+  const userData = localStorage.getItem("UserData");
+
+  useEffect(() => {
+    if (userData) {
+      history.push("/slider");
+    }
+  }, [history, userData]);
+
+  /* Testing fetch
+  const [offerDesc, setOfferDesc] = useState("");
+  useEffect(() => {
+    const fetchy = async () => {
+      let first = await fetch(
+        `${config.API_URL}ManageGeneralData/GetAllOffers?PageIndex=1&LanguageId=1&PageSize=100`
+      );
+      let { Data } = await first.json();
+      console.log(Data);
+      setOfferDesc(Data.offers[0].Description);
+    };
+    fetchy();
+  }, []);
+  */
   return (
-    <>
+    <IonPage>
       {/*
       <IonHeader>
         <IonToolbar>
@@ -13,8 +38,14 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       */}
-      <IonContent className="land-bg">
-        {/*
+      {!userData && (
+        <IonContent className="land-bg" id="main-content">
+          {" "}
+          <LandingSelect />
+        </IonContent>
+      )}
+
+      {/*
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Blank</IonTitle>
@@ -25,10 +56,9 @@ const Home: React.FC = () => {
         <RegisterForm />
 
         <IonButton routerLink="/slider">Slider</IonButton>
+        <IonTitle>{offerDesc}</IonTitle>
         */}
-        <LandingSelect />
-      </IonContent>
-    </>
+    </IonPage>
   );
 };
 

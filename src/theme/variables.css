@@ -48,13 +48,12 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-danger-shade: #cf3c4f;
   --ion-color-danger-tint: #ed576b;
 
-  /** dark **/
-  --ion-color-dark: #222428;
-  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark: #323232;
+  --ion-color-dark-rgb: 50, 50, 50;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e2023;
-  --ion-color-dark-tint: #383a3e;
+  --ion-color-dark-shade: #2c2c2c;
+  --ion-color-dark-tint: #474747;
 
   /** medium **/
   --ion-color-medium: #92949c;
@@ -393,6 +392,11 @@ ion-input.reg-input:focus {
   padding: 16px 0;
 }
 
+ion-toolbar.profile-toolbar {
+  min-height: 20vh;
+  padding: 0 16px;
+}
+
 .fullh {
   height: 100vh;
 }
@@ -405,6 +409,12 @@ ion-input.reg-input:focus {
   left: 0px;
   right: 0px;
   position: absolute;
+}
+
+.hidden-file-input {
+  display: none;
+  height: 0px;
+  width: 0px;
 }
 
 ::placeholder {

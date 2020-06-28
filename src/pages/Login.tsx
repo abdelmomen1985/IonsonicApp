@@ -1,18 +1,44 @@
-import React, { SyntheticEvent, useCallback } from "react";
-import { IonPage, IonContent, IonInput, IonButton } from "@ionic/react";
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useState,
+  useContext,
+} from "react";
+import {
+  IonPage,
+  IonContent,
+  IonInput,
+  IonButton,
+  IonChip,
+  IonIcon,
+  IonLabel,
+} from "@ionic/react";
 import manaraLogo from "../images/manara_txt_logo.png";
 import { strings } from "../localization/localization";
 import config from "../config";
 import { useHistory } from "react-router-dom";
+import Axios from "axios";
+import { bugy } from "../utils/functions";
+import { alertCircleOutline } from "ionicons/icons";
+import { AppCtxt } from "../Context";
 
 export default function Login() {
+  const [loginError, setLoginError] = useState<string>("");
   const history = useHistory();
+  const { setUserData } = useContext(AppCtxt);
+
+  // TODO don't use useCallback [later]
+  // TODO or use Route Rendering (Conditional Rendering) [later]
   const handleSubmit = useCallback(async (e: SyntheticEvent) => {
     e.preventDefault();
+    const goHome = () => {
+      bugy("goHome");
+      let user = JSON.parse(localStorage.getItem("UserData")!);
+      setUserData(user);
+      history.push("/user_home");
+    };
     const { email, password } = e.target as any;
-
-    try {
-      /*
+    /*
       const headers = {
         "Content-Type": "application/json",
       };
@@ -32,26 +58,32 @@ export default function Login() {
       console.log(Data);
       */
 
-      let resp = await fetch(`${config.PROXY_POST}ManageAccount/Login`, {
-        method: "POST",
+    Axios.post(
+      `${config.PROXY_POST}ManageAccount/Login`,
+      {
+        email: email.value,
+        password: password.value,
+      },
+      {
         headers: {
           "Content-Type": "application/json",
         },
-        redirect: "follow",
-        referrer: "no-referrer",
-        body: JSON.stringify({
-          email: email.value,
-          password: password.value,
-        }),
-      });
-      let { Data } = await resp.json();
-      if (Data?.User) {
-        localStorage.setItem("UserData", JSON.stringify(Data.User));
-        history.push("/welcome");
       }
-    } catch (error) {
-      alert(error);
-    }
+    )
+      .then((resp) => {
+        let { Data } = resp.data;
+        if (Data && Data.Status === 200) {
+          localStorage.setItem("UserData", JSON.stringify(Data.User));
+          goHome();
+        } else if (Data.Status === 400) {
+          // Show error
+          console.error("Login Error");
+          setLoginError(Data.Message);
+        }
+      })
+      .catch((error) => {
+        bugy(error);
+      });
   }, []);
 
   return (
@@ -79,6 +111,12 @@ export default function Login() {
                 className="reg-input"
                 placeholder={strings.user.password}
               />
+              {loginError && (
+                <IonChip color="danger" style={{ backgroundColor: "#dedede" }}>
+                  <IonIcon icon={alertCircleOutline} />
+                  <IonLabel>{loginError}</IonLabel>
+                </IonChip>
+              )}
             </div>
 
             <div className="reg-element">

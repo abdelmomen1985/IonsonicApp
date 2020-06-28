@@ -19,6 +19,6 @@ const strings = new LocalizedStrings({
 });
 
 const language = localStorage.getItem("lang");
-strings.setLanguage(language === null ? "ar" : language);
+strings.setLanguage(language === null ? "en" : language);
 
 export { setLanguage, strings };

@@ -12,6 +12,7 @@ export type UserType = {
   ProfileImage: string;
   barcode: string;
   cart: string;
+  ResidencyId: string;
 };
 
 export type OfferType = {

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
-  IonSelect,
-  IonSelectOption,
   IonButton,
   IonModal,
   IonList,
@@ -12,23 +10,16 @@ import {
 } from "@ionic/react";
 import manaraLogo from "../images/manara_logo.png";
 import ksaLogo from "../images/flags/ksa.png";
-import indiaLogo from "../images/flags/india.png";
-import ukLogo from "../images/flags/uk.png";
-import pakistanLogo from "../images/flags/pakistan.png";
-import bangLogo from "../images/flags/bang.png";
 import uaeLogo from "../images/flags/uae.png";
 import egyptLogo from "../images/flags/egypt.png";
 import { useHistory } from "react-router-dom";
+import { strings } from "../localization/localization";
+import SelectLangModal from "./SelectLangModal";
+import { AppCtxt } from "../Context";
 
 export default function LandingSelect() {
   const history = useHistory();
-
-  useEffect(() => {
-    if (localStorage.getItem("UserData")) {
-      console.log("user data found");
-      history.push("/slider");
-    }
-  }, [history]);
+  const { setCurrentLang } = useContext(AppCtxt);
 
   const [selectedLang, setSelectedLang] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -47,77 +38,13 @@ export default function LandingSelect() {
 
   return (
     <>
-      {" "}
-      <IonModal isOpen={showModalLang} cssClass="custom-modal modal-lang">
-        <IonList>
-          <IonItem
-            onClick={() => {
-              selectLang("ar");
-            }}
-          >
-            <IonAvatar slot="start">
-              <IonImg src={ksaLogo} />
-            </IonAvatar>
-            <IonLabel>
-              <h2>Arabic</h2>
-            </IonLabel>
-          </IonItem>
-
-          <IonItem
-            onClick={() => {
-              selectLang("en");
-            }}
-          >
-            <IonAvatar slot="start">
-              <IonImg src={ukLogo} />
-            </IonAvatar>
-            <IonLabel>
-              <h2>English</h2>
-            </IonLabel>
-          </IonItem>
-
-          <IonItem
-            onClick={() => {
-              selectLang("hi");
-            }}
-          >
-            <IonAvatar slot="start">
-              <IonImg src={indiaLogo} />
-            </IonAvatar>
-            <IonLabel>
-              <h2>Indian</h2>
-            </IonLabel>
-          </IonItem>
-
-          <IonItem
-            onClick={() => {
-              selectLang("ur");
-            }}
-          >
-            <IonAvatar slot="start">
-              <IonImg src={pakistanLogo} />
-            </IonAvatar>
-            <IonLabel>
-              <h2>Urdu</h2>
-            </IonLabel>
-          </IonItem>
-
-          <IonItem
-            onClick={() => {
-              selectLang("bn");
-            }}
-          >
-            <IonAvatar slot="start">
-              <IonImg src={bangLogo} />
-            </IonAvatar>
-            <IonLabel>
-              <h2>Bengali</h2>
-            </IonLabel>
-          </IonItem>
-        </IonList>
-
-        <IonButton onClick={() => setShowModalLang(false)}>Close</IonButton>
-      </IonModal>
+      <SelectLangModal
+        onSelectLang={selectLang}
+        open={showModalLang}
+        onToggModal={(open) => {
+          setShowModalLang(open);
+        }}
+      />
       <IonModal isOpen={showModalCountry} cssClass="custom-modal modal-country">
         <IonList>
           <IonItem
@@ -209,10 +136,15 @@ export default function LandingSelect() {
             expand="block"
             className="reg-btn"
             onClick={() => {
-              // save lang and country to local storage and go to next page (sliders)
-              localStorage.setItem("lang", selectedLang);
-              localStorage.setItem("country", selectedCountry);
-              history.push("/slider");
+              if (selectedLang && selectedCountry) {
+                // save lang and country to local storage and go to next page (sliders)
+                localStorage.setItem("lang", selectedLang);
+                setCurrentLang(selectedLang);
+                // change strings lang
+                strings.setLanguage(selectedLang);
+                localStorage.setItem("country", selectedCountry);
+                history.push("/slider");
+              }
             }}
           >
             GET STARTED

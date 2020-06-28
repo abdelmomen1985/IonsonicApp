@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 
@@ -30,32 +30,49 @@ import Welcome from "./pages/Welcome";
 import UserHome from "./pages/UserHome";
 import Offers from "./pages/Offers";
 import AppMenu from "./components/AppMenu";
+import RedeemCtg from "./pages/RedeemCtg";
+import Profile from "./pages/side/Profile";
+import Settings from "./pages/side/Settings";
+import ContactUs from "./pages/side/ContactUs";
+import SideInfo from "./pages/side/SideInfo";
+import Notifications from "./pages/Notifications";
+import UserTransactions from "./pages/UserTransactions";
+import { AppCtxt } from "./Context";
 
 const App: React.FC = () => {
-  const [lang, setLang] = useState<string>("ar");
+  const { currentLang } = useContext(AppCtxt);
   // first check user lang
-  useEffect(() => {
-    const lang = localStorage.getItem("lang");
-    setLang(lang as string);
-  }, []);
 
   return (
     <IonApp>
       <IonReactRouter>
-        <AppMenu lang={lang} />
-        <IonRouterOutlet>
-          <Switch>
-            <Route path="/home" component={Home} exact />
-            <Route path="/slider" component={Slider} exact />
-            <Route path="/register" component={Register} exact />
-            <Route path="/out" component={LoggedOut} exact />
-            <Route path="/login" component={Login} exact />
-            <Route path="/welcome" component={Welcome} exact />
-            <Route path="/user_home" component={UserHome} exact />
-            <Route path="/offers" component={Offers} exact />
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
-          </Switch>
-        </IonRouterOutlet>
+        <IonSplitPane contentId="main-content">
+          <AppMenu lang={currentLang as string} />
+
+          <IonRouterOutlet id="main-content">
+            <Route path="/home" component={Home} />
+            <Route path="/slider" component={Slider} />
+            <Route path="/register" component={Register} />
+            <Route path="/out" component={LoggedOut} />
+            <Route path="/login" component={Login} />
+            <Route path="/welcome" component={Welcome} />
+            <Route path="/user_home" component={UserHome} />
+            <Route path="/offers" component={Offers} />
+            <Route path="/redeem_ctg" component={RedeemCtg} />
+            <Route path="/notifications" component={Notifications} />
+            <Route path="/transactions" component={UserTransactions} />
+            {/** side menu */}
+            <Route path="/profile" component={Profile} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/contact_us" component={ContactUs} />
+            <Route path="/tips" component={SideInfo} />
+            <Route path="/help" component={SideInfo} />
+            <Route path="/privacy" component={SideInfo} />
+            <Route path="/terms" component={SideInfo} />
+
+            <Redirect exact from="/" to="/home" />
+          </IonRouterOutlet>
+        </IonSplitPane>
       </IonReactRouter>
     </IonApp>
   );

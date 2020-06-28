@@ -5,7 +5,7 @@ import RegisterForm from "../components/RegisterForm";
 
 const Register: React.FC = () => {
   return (
-    <>
+    <IonPage>
       {/*
       <IonHeader>
         <IonToolbar>
@@ -16,7 +16,7 @@ const Register: React.FC = () => {
       <IonContent className="reg-bg" id="main-content">
         <RegisterForm />
       </IonContent>
-    </>
+    </IonPage>
   );
 };
 

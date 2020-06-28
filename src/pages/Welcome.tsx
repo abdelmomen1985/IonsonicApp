@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IonPage, IonContent, IonButton, IonRouterLink } from "@ionic/react";
 import manaraLogo from "../images/manara_txt_logo.png";
 import { strings } from "../localization/localization";
-import { useHistory } from "react-router-dom";
-export default function Welcome() {
-  const history = useHistory();
-  useEffect(() => {
-    if (localStorage.getItem("UserData")) {
-      console.log("user data found");
-      history.push("/user_home");
-    }
-  }, [history]);
 
+export default function Welcome() {
   return (
     <IonPage>
       <IonContent className="login-bg">
