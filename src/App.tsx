@@ -40,6 +40,9 @@ import UserTransactions from "./pages/UserTransactions";
 import { AppCtxt } from "./Context";
 import BranchesMap from "./pages/BranchesMap";
 import SingleMap from "./pages/SingleMap";
+import NewsAndTips from "./pages/NewsAndTips";
+import UserCard from "./pages/UserCard";
+import RedeemItems from "./pages/RedeemItems";
 
 const App: React.FC = () => {
   const { currentLang } = useContext(AppCtxt);
@@ -59,17 +62,19 @@ const App: React.FC = () => {
             <Route path="/login" component={Login} />
             <Route path="/welcome" component={Welcome} />
             <Route path="/user_home" component={UserHome} />
+            <Route path="/user_card" component={UserCard} />
             <Route path="/offers" component={Offers} />
             <Route path="/branches" component={BranchesMap} />
             <Route path="/area_map/:areaId" component={SingleMap} />
             <Route path="/redeem_ctg" component={RedeemCtg} />
+            <Route path="/redeem/:what" component={RedeemItems} />
             <Route path="/notifications" component={Notifications} />
             <Route path="/transactions" component={UserTransactions} />
             {/** side menu */}
             <Route path="/profile" component={Profile} />
             <Route path="/settings" component={Settings} />
             <Route path="/contact_us" component={ContactUs} />
-            <Route path="/tips" component={SideInfo} />
+            <Route path="/tips" component={NewsAndTips} />
             <Route path="/help" component={SideInfo} />
             <Route path="/privacy" component={SideInfo} />
             <Route path="/terms" component={SideInfo} />

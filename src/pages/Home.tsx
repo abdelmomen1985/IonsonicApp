@@ -1,8 +1,15 @@
-import { IonContent, IonPage } from "@ionic/react";
+import {
+  IonContent,
+  IonPage,
+  IonMenuToggle,
+  IonButton,
+  IonIcon,
+} from "@ionic/react";
 import React, { useEffect } from "react";
 import LandingSelect from "../components/LandingSelect";
 import { useHistory } from "react-router-dom";
 import { bugy } from "../utils/functions";
+import { menuOutline } from "ionicons/icons";
 
 //import ExploreContainer from "../components/ExploreContainer";
 
@@ -33,7 +40,13 @@ const Home: React.FC = () => {
   */
   return (
     <IonPage>
+      <div style={{ position: "relative" }}>
+        <IonMenuToggle className="home-menu-icon">
+          <IonIcon icon={menuOutline} color="primary" />
+        </IonMenuToggle>
+      </div>
       {/*
+      
       <IonHeader>
         <IonToolbar>
           <IonTitle>التسجيل</IonTitle>

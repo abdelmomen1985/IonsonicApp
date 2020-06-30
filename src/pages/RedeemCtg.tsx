@@ -38,14 +38,14 @@ export default function RedeemCtg() {
         </IonToolbar>
       </IonHeader>
       <IonContent className="redeem-ctg-bg">
-        <IonCard className="ion-text-center">
+        <IonCard className="ion-text-center" routerLink="/redeem/panasonic">
           <img src={panasonic} alt="" style={{ maxWidth: "65%" }} />
           <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
             Panasonic Products
           </IonCardTitle>
         </IonCard>
 
-        <IonCard className="ion-text-center">
+        <IonCard className="ion-text-center" routerLink="/redeem/gifts">
           <img
             src={gifts}
             alt=""
@@ -56,7 +56,7 @@ export default function RedeemCtg() {
           </IonCardTitle>
         </IonCard>
 
-        <IonCard className="ion-text-center">
+        <IonCard className="ion-text-center" routerLink="/redeem/vouchers">
           <img
             src={vouchers}
             alt=""

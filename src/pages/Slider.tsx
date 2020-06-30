@@ -19,6 +19,7 @@ const slideOpts = {
 
 const Slider: React.FC = () => {
   const history = useHistory();
+  // TODO: get slides dynamicly [later]
   return (
     <IonPage>
       <IonContent>

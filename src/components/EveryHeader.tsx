@@ -25,7 +25,9 @@ export default function EveryHeader({ title }: EveryHeaderProps) {
           </IonMenuToggle>
         </IonButtons>
         <IonButtons slot="end">
+          {/** No need for now 
           <IonIcon slot="icon-only" icon={cardOutline} color="light" />
+          */}
         </IonButtons>
         <IonTitle> {title} </IonTitle>
       </IonToolbar>

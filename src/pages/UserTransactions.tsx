@@ -10,6 +10,7 @@ import {
 import EveryHeader from "../components/EveryHeader";
 import { strings } from "../localization/localization";
 import { AppCtxt } from "../Context";
+import Footer from "../components/Footer";
 
 export default function UserTransactions() {
   const { currentLang } = useContext(AppCtxt);
@@ -28,6 +29,7 @@ export default function UserTransactions() {
           <IonCardContent>اسم الصنف</IonCardContent>
         </IonCard>
       </IonContent>
+      <Footer current="" />
     </IonPage>
   );
 }

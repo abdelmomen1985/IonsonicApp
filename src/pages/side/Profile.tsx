@@ -13,13 +13,14 @@ import {
   IonContent,
 } from "@ionic/react";
 import { AppCtxt } from "../../Context";
-import { arrowBackOutline } from "ionicons/icons";
+import { arrowBackOutline, cameraOutline } from "ionicons/icons";
 import avatarImg from "../../images/avatar.png";
 import menuIcon from "../../images/left_menu.png";
 import { strings } from "../../localization/localization";
 import Footer from "../../components/Footer";
 import { UserType } from "../../types/types";
 import config from "../../config";
+import EveryHeader from "../../components/EveryHeader";
 
 export default function Profile() {
   const { currentLang } = useContext(AppCtxt);
@@ -30,6 +31,7 @@ export default function Profile() {
         direction: currentLang === "ar" ? "rtl" : "ltr",
       }}
     >
+      {/*
       <IonHeader>
         <IonToolbar color="tertiary" className="profile-toolbar">
           <IonButtons slot="start">
@@ -40,22 +42,39 @@ export default function Profile() {
           <IonButtons slot="end">
             <IonIcon slot="icon-only" icon={arrowBackOutline} color="light" />
           </IonButtons>
-          {/** <IonTitle> {strings.menu.profile} </IonTitle>*/}
+          {<IonTitle> {strings.menu.profile} </IonTitle>}
         </IonToolbar>
       </IonHeader>
+      */}
+      <EveryHeader title={strings.menu.profile} />
       <IonContent>
         <div className="ion-text-center">
-          <div className="avatar-img">
+          <div
+            className="avatar-img"
+            style={{
+              border: "4px solid #efd5d5",
+              boxShadow: "1px 2px 2px rgba(182, 30, 30, 0.3)",
+            }}
+          >
             <label htmlFor="file-input">
-              {userData.ProfileImage ? (
-                <img
-                  src={userData.ProfileImage}
-                  alt=""
-                  style={{ maxWidth: "140%" }}
-                />
-              ) : (
-                <img src={avatarImg} alt="" style={{ maxWidth: "140%" }} />
-              )}
+              <div style={{ position: "relative" }}>
+                {userData.ProfileImage ? (
+                  <img
+                    src={userData.ProfileImage}
+                    alt=""
+                    style={{ maxWidth: "100%", borderRadius: "50%" }}
+                  />
+                ) : (
+                  <img
+                    src={avatarImg}
+                    alt=""
+                    style={{ maxWidth: "140%", borderRadius: "50%" }}
+                  />
+                )}
+                <div className="change-img">
+                  <IonIcon icon={cameraOutline} color="dark" />
+                </div>
+              </div>
             </label>
 
             <input

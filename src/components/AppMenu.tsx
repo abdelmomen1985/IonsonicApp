@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   IonMenu,
   IonHeader,
@@ -23,12 +23,14 @@ import {
 } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
 import { strings } from "../localization/localization";
+import { AppCtxt } from "../Context";
 
 interface AppMenuProps {
   lang: string;
 }
 export default function AppMenu({ lang }: AppMenuProps) {
   const history = useHistory();
+  const { user } = useContext(AppCtxt);
   return (
     <IonMenu
       side={lang === "ar" ? "end" : "start"}
@@ -43,18 +45,33 @@ export default function AppMenu({ lang }: AppMenuProps) {
       <IonContent>
         <IonMenuToggle>
           <IonList>
-            <IonItem routerLink="/user_home" routerDirection="root">
-              <IonIcon slot="start" icon={homeOutline} color="dark" />
-              <IonLabel>{strings.main.home}</IonLabel>
-            </IonItem>
-            <IonItem routerLink="/profile" routerDirection="root">
-              <IonIcon slot="start" icon={personCircleOutline} color="dark" />
-              <IonLabel>{strings.menu.profile}</IonLabel>
-            </IonItem>
-            <IonItem routerLink="/settings">
-              <IonIcon slot="start" icon={settingsOutline} color="dark" />
-              <IonLabel>{strings.menu.settings}</IonLabel>
-            </IonItem>
+            {!user.Id && (
+              <IonItem routerLink="/" routerDirection="root">
+                <IonIcon slot="start" icon={homeOutline} color="dark" />
+                <IonLabel>{strings.main.home}</IonLabel>
+              </IonItem>
+            )}
+            {user?.Id && (
+              <>
+                <IonItem routerLink="/user_home" routerDirection="root">
+                  <IonIcon slot="start" icon={homeOutline} color="dark" />
+                  <IonLabel>{strings.main.home}</IonLabel>
+                </IonItem>
+
+                <IonItem routerLink="/profile" routerDirection="root">
+                  <IonIcon
+                    slot="start"
+                    icon={personCircleOutline}
+                    color="dark"
+                  />
+                  <IonLabel>{strings.menu.profile}</IonLabel>
+                </IonItem>
+                <IonItem routerLink="/settings">
+                  <IonIcon slot="start" icon={settingsOutline} color="dark" />
+                  <IonLabel>{strings.menu.settings}</IonLabel>
+                </IonItem>
+              </>
+            )}
             <IonItem routerLink="/tips">
               <IonIcon slot="start" icon={trailSignOutline} color="dark" />
               <IonLabel>{strings.menu.tips}</IonLabel>
@@ -75,17 +92,19 @@ export default function AppMenu({ lang }: AppMenuProps) {
               <IonIcon slot="start" icon={documentTextOutline} color="dark" />
               <IonLabel>{strings.menu.privacy}</IonLabel>
             </IonItem>
-            <IonItem
-              onClick={() => {
-                // Log out and clear localStorage
-                localStorage.clear();
-                history.push("/");
-                window.location.reload(false);
-              }}
-            >
-              <IonIcon slot="start" icon={logOutOutline} color="dark" />
-              <IonLabel>{strings.menu.logout}</IonLabel>
-            </IonItem>
+            {user?.Id && (
+              <IonItem
+                onClick={() => {
+                  // Log out and clear localStorage
+                  localStorage.clear();
+                  history.push("/");
+                  window.location.reload(false);
+                }}
+              >
+                <IonIcon slot="start" icon={logOutOutline} color="dark" />
+                <IonLabel>{strings.menu.logout}</IonLabel>
+              </IonItem>
+            )}
           </IonList>
         </IonMenuToggle>
       </IonContent>

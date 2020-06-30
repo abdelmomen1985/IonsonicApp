@@ -45,14 +45,16 @@ export default function BranchesMap() {
                   <img src={menuIcon} alt="" />
                 </IonMenuToggle>
               </div>
-
+              {/* No back btn
               <div>
                 <IonIcon
                   slot="icon-only"
                   icon={arrowBackOutline}
                   color="light"
+                  style={{ fontSize: "1.5em" }}
                 />
               </div>
+              */}
             </div>
           </div>
           <div className="ion-text-center user-avatar">
@@ -77,7 +79,9 @@ export default function BranchesMap() {
                 }}
               >
                 {areas.map((area) => (
-                  <IonSelectOption value={area.Id}>{area.Name}</IonSelectOption>
+                  <IonSelectOption key={area.Id} value={area.Id}>
+                    {area.Name}
+                  </IonSelectOption>
                 ))}
               </IonSelect>
             </div>

@@ -13,6 +13,8 @@ export type UserType = {
   barcode: string;
   cart: string;
   ResidencyId: string;
+  // TODO remove [later]
+  walts: string;
 };
 
 export type OfferType = {
@@ -32,4 +34,30 @@ export type AreaType = {
   Name: string;
   Longitude: number;
   Latitude: number;
+};
+
+export type ContactUsType = {
+  Id: number;
+  UserName: string;
+  TypeId: number;
+  Details: string;
+  Images: [{ Image: string }];
+};
+
+export type NewsType = {
+  Id: number;
+  TitleAr: string;
+  TitleEn: string;
+  TitleInd: string;
+  TitleUrd: string;
+  TitleBng: string;
+
+  DescAr: string;
+  DescEn: string;
+  DescInd: string;
+  DescUrd: string;
+  DescBng: string;
+  CreatedDate: string;
+
+  Images: [{ Image: string }];
 };

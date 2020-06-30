@@ -14,6 +14,10 @@ const english = {
     speak: "Speak to us",
     inquery: "Inquery",
     previous_work: "Previous Work",
+    change: "Change",
+    close: "Close",
+    send: "Send",
+    no_notifications: "There are no new notifications",
   },
   slider: {
     next: "Next",

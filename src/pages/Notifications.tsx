@@ -12,7 +12,7 @@ import {
 import Footer from "../components/Footer";
 
 import menuIcon from "../images/left_menu.png";
-import { cardOutline } from "ionicons/icons";
+import { cardOutline, alertCircleOutline } from "ionicons/icons";
 import { strings } from "../localization/localization";
 import { AppCtxt } from "../Context";
 
@@ -35,7 +35,14 @@ export default function Offers() {
           <IonTitle> {strings.main.notifications} </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="notifications-home-bg"></IonContent>
+      <IonContent className="notifications-home-bg">
+        <div className="ion-margin ">
+          <p style={{ padding: "1em", fontSize: "1.3em" }}>
+            <IonIcon color="primary" icon={alertCircleOutline} />
+            {strings.main.no_notifications}
+          </p>
+        </div>
+      </IonContent>
       <Footer current="notifications" />
     </IonPage>
   );

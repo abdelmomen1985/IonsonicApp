@@ -48,7 +48,9 @@ export default function SingleMap({ match }: RouteComponentProps) {
                 }}
               >
                 {areas.map((area) => (
-                  <IonSelectOption value={area.Id}>{area.Name}</IonSelectOption>
+                  <IonSelectOption key={area.Id} value={area.Id}>
+                    {area.Name}
+                  </IonSelectOption>
                 ))}
               </IonSelect>
             </div>
