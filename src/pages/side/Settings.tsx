@@ -14,7 +14,7 @@ export default function Settings() {
   const selectLang = (lang: string) => {
     // Change selected lang
     localStorage.setItem("lang", lang);
-
+    localStorage.removeItem("AppData");
     setShowModalLang(false);
     window.location.reload(false);
   };

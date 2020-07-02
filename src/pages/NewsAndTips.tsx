@@ -45,9 +45,11 @@ export default function NewsAndTips() {
           <IonCard className="ion-margin" key={single.Id}>
             <img src={single.Images[0].Image} alt="" />
             <IonCardTitle className="ion-padding">
-              {single.TitleAr}
+              {currentLang === "ar" ? single.TitleAr : single.TitleEn}
             </IonCardTitle>
-            <IonCardContent>{single.DescAr}</IonCardContent>
+            <IonCardContent>
+              {currentLang === "ar" ? single.DescAr : single.DescEn}
+            </IonCardContent>
           </IonCard>
         ))}
       </IonContent>

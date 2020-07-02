@@ -78,6 +78,7 @@ const App: React.FC = () => {
             <Route path="/help" component={SideInfo} />
             <Route path="/privacy" component={SideInfo} />
             <Route path="/terms" component={SideInfo} />
+            <Route path="/how" component={SideInfo} />
 
             <Redirect exact from="/" to="/home" />
           </IonRouterOutlet>

@@ -37,7 +37,7 @@ const Slider: React.FC = () => {
                 <IonButton
                   onClick={() => {
                     const userData = localStorage.getItem("UserData");
-                    if (userData) history.push("/user_home");
+                    if (userData) history.push("/");
                     else history.push("/welcome");
                   }}
                 >

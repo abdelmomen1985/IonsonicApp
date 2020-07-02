@@ -32,7 +32,7 @@ export default function ContactModal({
 }: ContactModalProps) {
   const [inOpen, setInOpen] = useState(open);
   const [typeId, setTypeId] = useState(contactTypeId);
-  const history = useHistory();
+  const [uploadFiles, setUploadFiles] = useState<string[]>([]);
   const { user } = useContext(AppCtxt);
   useEffect(() => {
     setInOpen(open);
@@ -56,8 +56,19 @@ export default function ContactModal({
     //history.push("/offers");
   };
 
-  const onImgsAttached = () => {};
-
+  const onImgsAttached = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      console.log("inside files");
+      let i = 0;
+      const uploadFiles = [];
+      while (i < files?.length) {
+        uploadFiles.push(files[i].name);
+        i++;
+      }
+      setUploadFiles(uploadFiles);
+    }
+  };
   useEffect(() => {
     setTypeId(contactTypeId);
   }, [contactTypeId]);
@@ -100,6 +111,11 @@ export default function ContactModal({
             multiple
           />
         </div>
+        {uploadFiles.map((item) => (
+          <div className="attached-img" key={item}>
+            {item}
+          </div>
+        ))}
         <div className="reg-element">
           <IonButton
             type="submit"

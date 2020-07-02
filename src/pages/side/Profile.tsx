@@ -13,18 +13,64 @@ import {
   IonContent,
 } from "@ionic/react";
 import { AppCtxt } from "../../Context";
-import { arrowBackOutline, cameraOutline } from "ionicons/icons";
+import { cameraOutline } from "ionicons/icons";
 import avatarImg from "../../images/avatar.png";
-import menuIcon from "../../images/left_menu.png";
+
 import { strings } from "../../localization/localization";
 import Footer from "../../components/Footer";
-import { UserType } from "../../types/types";
 import config from "../../config";
 import EveryHeader from "../../components/EveryHeader";
+import { getMaritalStatus } from "../../utils/functions";
 
 export default function Profile() {
-  const { currentLang } = useContext(AppCtxt);
-  const userData = JSON.parse(localStorage.getItem("UserData")!) as UserType;
+  const { currentLang, user } = useContext(AppCtxt);
+  const changeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    // this.setState({ uploading: true })
+    const formData = new FormData();
+    formData.append("userId", "" + user.Id);
+    if (files) {
+      console.log("inside files");
+      let i = 0;
+      /*
+      while (i < files?.length) {
+        formData.append("Image", files[i]);
+        i++;
+      }
+      */
+      // OR
+      formData.append("Image", files[i]);
+
+      try {
+        let resp = await fetch(
+          `${config.API_URL}ManageCustomer/UpdateImageProfile`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        /*
+        // Try to login not working
+        formData.append("email", "abdelmomen@gmail.com");
+        formData.append("password", "123");
+        let resp = await fetch(
+          `${config.API_URL}ManageAccount/Login`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+        */
+        let { Data } = await resp.json();
+        if (Data?.Status === 200) {
+          localStorage.setItem("UserData", JSON.stringify(Data.User));
+          window.location.reload(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
   return (
     <IonPage
       style={{
@@ -57,12 +103,12 @@ export default function Profile() {
             }}
           >
             <label htmlFor="file-input">
-              <div style={{ position: "relative" }}>
-                {userData.ProfileImage ? (
+              <div className="imglabel-wrap">
+                {user.ProfileImage ? (
                   <img
-                    src={userData.ProfileImage}
+                    src={user.ProfileImage}
                     alt=""
-                    style={{ maxWidth: "100%", borderRadius: "50%" }}
+                    style={{ maxWidth: "140%", borderRadius: "50%" }}
                   />
                 ) : (
                   <img
@@ -81,56 +127,7 @@ export default function Profile() {
               type="file"
               id="file-input"
               className="hidden-file-input"
-              onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
-                const files = e.target.files;
-                // this.setState({ uploading: true })
-                const formData = new FormData();
-                formData.append("userId", "8");
-                if (files) {
-                  console.log("inside files");
-                  let i = 0;
-                  /*
-                  while (i < files?.length) {
-                    formData.append("Image", files[i]);
-                    i++;
-                  }
-                  */
-                  // OR
-                  formData.append("Image", files[i]);
-
-                  try {
-                    let resp = await fetch(
-                      `${config.API_URL}ManageCustomer/UpdateImageProfile`,
-                      {
-                        method: "POST",
-                        body: formData,
-                      }
-                    );
-                    /*
-                    // Try to login not working
-                    formData.append("email", "abdelmomen@gmail.com");
-                    formData.append("password", "123");
-                    let resp = await fetch(
-                      `${config.API_URL}ManageAccount/Login`,
-                      {
-                        method: "POST",
-                        body: formData,
-                      }
-                    );
-                    */
-                    let { Data } = await resp.json();
-                    if (Data?.Status === 200) {
-                      localStorage.setItem(
-                        "UserData",
-                        JSON.stringify(Data.User)
-                      );
-                      window.location.reload(false);
-                    }
-                  } catch (error) {
-                    console.error(error);
-                  }
-                }
-              }}
+              onChange={changeImage}
             />
           </div>
         </div>
@@ -139,33 +136,37 @@ export default function Profile() {
             <IonLabel color="primary"> {strings.user.name} </IonLabel>
             <IonText>
               {" "}
-              {userData.FirstName} {userData.LastName}
+              {user.FirstName} {user.LastName}
             </IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.phone} </IonLabel>
-            <IonText dir="ltr"> {userData.Phone} </IonText>
+            <IonText dir="ltr"> {user.Phone} </IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.email} </IonLabel>
-            <IonText> {userData.Email} </IonText>
+            <IonText> {user.Email} </IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.residency} </IonLabel>
-            <IonText> {userData.ResidencyId}</IonText>
+            <IonText> {user.ResidencyId}</IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.city} </IonLabel>
-            <IonText> </IonText>
+            <IonText>{localStorage.getItem("CityName")}</IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary">{strings.user.material_status}</IonLabel>
-            <IonText></IonText>
+            <IonText>
+              {currentLang === "ar"
+                ? getMaritalStatus(user.MaterialStatusId).ar_name
+                : getMaritalStatus(user.MaterialStatusId).en_name}
+            </IonText>
           </IonItem>
         </IonList>
       </IonContent>

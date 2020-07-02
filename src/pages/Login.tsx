@@ -32,58 +32,26 @@ export default function Login() {
   const handleSubmit = useCallback(async (e: SyntheticEvent) => {
     e.preventDefault();
     const goHome = () => {
-      let user = JSON.parse(localStorage.getItem("UserData")!);
-      setUserData(user);
+      // Just to wait till the setUserData take place
       JSON.parse(localStorage.getItem("UserData")!);
       history.push("/user_home");
     };
     const { email, password } = e.target as any;
-    /*
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      let resp = await axios.post(
-        `${config.API_URL}ManageAccount/Login`,
-        {
-          email: email.value,
-          password: password.value,
-        },
-        { headers }
-      );
-      
-      let first = await fetch(
-        `${config.API_URL}ManageGeneralData/GetAllOffers?PageIndex=1&LanguageId=1&PageSize=100`
-      );
-      let { Data } = await first.json();
-      console.log(Data);
-      */
 
-    Axios.post(
-      `${config.PROXY_POST}ManageAccount/Login`,
-      {
-        email: email.value,
-        password: password.value,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((resp) => {
-        let { Data } = resp.data;
-        if (Data && Data.Status === 200) {
-          localStorage.setItem("UserData", JSON.stringify(Data.User));
-          goHome();
-        } else if (Data.Status === 400) {
-          // Show error
-          console.error("Login Error");
-          setLoginError(Data.Message);
-        }
-      })
-      .catch((error) => {
-        bugy(error);
-      });
+    const resp = await Axios.post(`${config.API_URL}ManageAccount/Login`, {
+      email: email.value,
+      password: password.value,
+    });
+
+    let { Data } = resp.data;
+    if (Data && Data.Status === 200) {
+      setUserData(Data.User);
+      goHome();
+    } else if (Data.Status === 400) {
+      // Show error
+      console.error("Login Error");
+      setLoginError(Data.Message);
+    }
   }, []);
 
   return (

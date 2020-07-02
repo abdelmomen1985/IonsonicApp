@@ -12,6 +12,11 @@ import {
   locationOutline,
   starOutline,
   giftOutline,
+  starSharp,
+  locationSharp,
+  giftSharp,
+  notificationsSharp,
+  personCircleSharp,
 } from "ionicons/icons";
 import { AppCtxt } from "../Context";
 
@@ -30,21 +35,29 @@ export default function Footer({ current }: FooterProps) {
               <IonButton routerLink="/user_home">
                 <IonIcon
                   slot="icon-only"
-                  icon={personCircleOutline}
+                  icon={
+                    current === "user_home"
+                      ? personCircleSharp
+                      : personCircleOutline
+                  }
                   color={current === "user_home" ? "tertiary" : "medium"}
                 />
               </IonButton>
               <IonButton routerLink="/notifications">
                 <IonIcon
                   slot="icon-only"
-                  icon={notificationsOutline}
+                  icon={
+                    current === "notifications"
+                      ? notificationsSharp
+                      : notificationsOutline
+                  }
                   color={current === "notifications" ? "tertiary" : "medium"}
                 />
               </IonButton>
               <IonButton routerLink="/redeem_ctg">
                 <IonIcon
                   slot="icon-only"
-                  icon={giftOutline}
+                  icon={current === "redeem_ctg" ? giftSharp : giftOutline}
                   color={current === "redeem_ctg" ? "tertiary" : "medium"}
                 />
               </IonButton>
@@ -52,13 +65,15 @@ export default function Footer({ current }: FooterProps) {
                 <IonIcon
                   color={current === "branches" ? "tertiary" : "medium"}
                   slot="icon-only"
-                  icon={locationOutline}
+                  icon={
+                    current === "branches" ? locationSharp : locationOutline
+                  }
                 />
               </IonButton>
               <IonButton routerLink="/offers">
                 <IonIcon
                   slot="icon-only"
-                  icon={starOutline}
+                  icon={current === "offers" ? starSharp : starOutline}
                   color={current === "offers" ? "tertiary" : "medium"}
                 />
               </IonButton>

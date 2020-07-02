@@ -1,14 +1,8 @@
-import {
-  IonContent,
-  IonPage,
-  IonMenuToggle,
-  IonButton,
-  IonIcon,
-} from "@ionic/react";
+import { IonContent, IonPage, IonMenuToggle, IonIcon } from "@ionic/react";
 import React, { useEffect } from "react";
 import LandingSelect from "../components/LandingSelect";
 import { useHistory } from "react-router-dom";
-import { bugy } from "../utils/functions";
+
 import { menuOutline } from "ionicons/icons";
 
 //import ExploreContainer from "../components/ExploreContainer";
@@ -17,25 +11,16 @@ const Home: React.FC = () => {
   const history = useHistory();
   const userData = localStorage.getItem("UserData");
 
+  // TODO : no internet [later]
   useEffect(() => {
-    bugy("Loading Home");
-    if (userData) {
-      history.push("/slider");
+    if (localStorage.getItem("UserData")) {
+      history.push("/user_home");
     }
-  }, [history, userData]);
+  }, [history]);
 
-  /* Testing fetch
-  const [offerDesc, setOfferDesc] = useState("");
+  /*
   useEffect(() => {
-    const fetchy = async () => {
-      let first = await fetch(
-        `${config.API_URL}ManageGeneralData/GetAllOffers?PageIndex=1&LanguageId=1&PageSize=100`
-      );
-      let { Data } = await first.json();
-      console.log(Data);
-      setOfferDesc(Data.offers[0].Description);
-    };
-    fetchy();
+
   }, []);
   */
   return (

@@ -6,6 +6,7 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardContent,
+  IonText,
 } from "@ionic/react";
 import EveryHeader from "../components/EveryHeader";
 import { strings } from "../localization/localization";
@@ -19,12 +20,31 @@ export default function UserTransactions() {
       <EveryHeader title={strings.main.my_transactions} />
       <IonContent>
         <IonCard>
-          <IonCardHeader color="tertiary"> 0 Watts</IonCardHeader>
+          <IonCardHeader color="tertiary">
+            <IonText className="c-head-text" color="light">
+              + 10 {strings.watts.title}
+            </IonText>
+          </IonCardHeader>
           <IonCardSubtitle class="ion-padding"> 2018/06/02 </IonCardSubtitle>
           <IonCardContent>اسم الصنف</IonCardContent>
         </IonCard>
+
         <IonCard>
-          <IonCardHeader color="tertiary"> 16 Watts</IonCardHeader>
+          <IonCardHeader color="danger">
+            <IonText className="c-head-text" color="light">
+              - 16 {strings.watts.title}
+            </IonText>
+          </IonCardHeader>
+          <IonCardSubtitle class="ion-padding"> 2018/07/02 </IonCardSubtitle>
+          <IonCardContent>{strings.main.redeem}</IonCardContent>
+        </IonCard>
+
+        <IonCard>
+          <IonCardHeader color="tertiary">
+            <IonText className="c-head-text" color="light">
+              + 16 {strings.watts.title}
+            </IonText>
+          </IonCardHeader>
           <IonCardSubtitle class="ion-padding"> 2018/07/02 </IonCardSubtitle>
           <IonCardContent>اسم الصنف</IonCardContent>
         </IonCard>

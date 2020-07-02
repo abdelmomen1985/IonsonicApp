@@ -143,6 +143,7 @@ export default function LandingSelect() {
                 // change strings lang
                 strings.setLanguage(selectedLang);
                 localStorage.setItem("country", selectedCountry);
+                localStorage.removeItem("AppData");
                 history.push("/slider");
               }
             }}

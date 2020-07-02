@@ -17,12 +17,14 @@ import { AppCtxt } from "../Context";
 import { AreaType } from "../types/types";
 import config from "../config";
 import { useHistory } from "react-router-dom";
+import { bugy } from "../utils/functions";
 
 export default function BranchesMap() {
   const history = useHistory();
   const { currentLang } = useContext(AppCtxt);
   const [areas, setAreas] = useState<AreaType[]>([]);
-  const [selectedBranchId, setSelectedBranchId] = useState<number>(0);
+  const [selectedAreaId, setSelectedAreaId] = useState(0);
+
   useEffect(() => {
     const getAllAreas = async () => {
       const langId = (config as any).LANG_CODES[currentLang as string].id;
@@ -31,13 +33,18 @@ export default function BranchesMap() {
       );
       let { Data: areas } = await resp.json();
       setAreas(areas);
+      if (localStorage.getItem("CityId")) {
+        const cityId = localStorage.getItem("CityId") + "";
+        setSelectedAreaId(+cityId);
+      }
     };
     getAllAreas();
   }, [currentLang]);
+
   return (
     <>
       <IonPage style={{ direction: currentLang === "ar" ? "rtl" : "ltr" }}>
-        <IonContent className="branches-bg">
+        <IonContent className="areas-bg">
           <div className="top-bg">
             <div className="top-nav">
               <div>
@@ -70,12 +77,18 @@ export default function BranchesMap() {
           {areas && (
             <div style={{ marginTop: "10vh" }} className="reg-element">
               <IonSelect
-                value={selectedBranchId}
+                value={selectedAreaId}
                 placeholder={strings.main.choose_area}
                 className="reg-input"
                 onIonChange={(e) => {
-                  setSelectedBranchId(e.detail.value);
-                  history.push("/area_map/" + e.detail.value);
+                  const cityId = e.detail.value;
+                  bugy(cityId);
+                  localStorage.setItem("CityId", cityId);
+                  const selectedArea = (areas as AreaType[]).filter(
+                    (area) => area.Id === cityId
+                  )[0];
+                  localStorage.setItem("CityName", selectedArea?.Name);
+                  history.push("/area_map/" + cityId);
                 }}
               >
                 {areas.map((area) => (
@@ -86,6 +99,8 @@ export default function BranchesMap() {
               </IonSelect>
             </div>
           )}
+          {localStorage.getItem("cityId") + "*"}
+          {localStorage.getItem("cityName")}
         </IonContent>
         <Footer current="branches" />
       </IonPage>

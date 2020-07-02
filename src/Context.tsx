@@ -1,10 +1,11 @@
 import React, { useReducer } from "react";
 import App from "./App";
-import { UserType } from "./types/types";
+import { UserType, AppDataType } from "./types/types";
 import { bugy } from "./utils/functions";
 
 const ACTION_TYPES = {
   CHANGE_CURRENT_LANG: "CHANGE_CURRENT_LANG",
+  SET_APP_DATA: "SET_APP_DATA",
   USER_LOGGED_IN: "USER_LOGGED_IN",
   USER_LOGGED_OUT: "USER_LOGGED_OUT",
 };
@@ -13,9 +14,15 @@ const initialState = {
   user: localStorage.getItem("UserData")
     ? (JSON.parse(localStorage.getItem("UserData")!) as UserType)
     : ({} as UserType),
-  currentLang: localStorage.getItem("lang"),
+  currentLang: localStorage.getItem("lang")
+    ? localStorage.getItem("lang")
+    : "en",
+  appData: localStorage.getItem("AppData")
+    ? (JSON.parse(localStorage.getItem("AppData")!) as AppDataType)
+    : null,
   setCurrentLang: (lang: string) => {},
   setUserData: (user: UserType) => {},
+  setAppData: (data: AppDataType) => {},
 };
 
 const AppCtxt = React.createContext({ ...initialState });
@@ -38,6 +45,12 @@ function appReducer(state: any, action: any) {
         ...state,
         user: null,
       };
+    case ACTION_TYPES.SET_APP_DATA:
+      const { appData } = action;
+      return {
+        ...state,
+        appData,
+      };
     default:
       return state;
   }
@@ -51,7 +64,13 @@ function CtxtProvider(props: any) {
   }
 
   function setUserData(user: UserType) {
+    localStorage.setItem("UserData", JSON.stringify(user));
     dispatch({ user, type: ACTION_TYPES.USER_LOGGED_IN });
+  }
+
+  function setAppData(appData: AppDataType) {
+    localStorage.setItem("AppData", JSON.stringify(appData));
+    dispatch({ appData, type: ACTION_TYPES.SET_APP_DATA });
   }
 
   return (
@@ -60,9 +79,10 @@ function CtxtProvider(props: any) {
         notebook: state.notebook,
         currentLang: state.currentLang,
         user: state.user,
+        appData: state.appData,
         setUserData,
-
         setCurrentLang,
+        setAppData,
       }}
       {...props}
     >

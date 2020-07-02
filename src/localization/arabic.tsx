@@ -7,6 +7,9 @@ const arabic = {
     my_vouchers: "القسائم المتاحة",
     my_gifts: "الهديا المتاحة",
     av_gifts_vouchers: "الهدايا والقسائم المتاحة",
+    vouchers: " القسائم ",
+    gifts: "الهدايا",
+    panasonic_products: "منتجات باناسونيك",
     notifications: "الاشعارات",
     change_langauge: "تغيير اللغة",
     get_started: " البـدء",
@@ -18,6 +21,8 @@ const arabic = {
     close: "اغلاق",
     send: "ارسال",
     no_notifications: "لا يوجد اشعارات جديدة",
+    expiry_date: "تاريخ الانتهاء",
+    redeem: "استبدال",
   },
   slider: {
     next: "التالي",

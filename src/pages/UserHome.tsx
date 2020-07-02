@@ -5,6 +5,8 @@ import {
   IonButton,
   IonText,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
 } from "@ionic/react";
 import avatarImg from "../images/avatar.png";
 import menuIcon from "../images/left_menu.png";
@@ -14,11 +16,23 @@ import { strings } from "../localization/localization";
 import Footer from "../components/Footer";
 import { AppCtxt } from "../Context";
 import ContactModal from "../components/ContactModal";
+import { RefresherEventDetail } from "@ionic/core";
+import Axios from "axios";
+import config from "../config";
 
 export default function UserHome() {
-  const { currentLang, user } = useContext(AppCtxt);
+  const { currentLang, user, setUserData } = useContext(AppCtxt);
   const [modalOpen, setModalOpen] = useState(false);
-
+  const doRefresh = async (event: CustomEvent<RefresherEventDetail>) => {
+    let resp = await Axios.post(`${config.API_URL}ManageAccount/Login`, {
+      email: user.Email,
+      password: user.Password,
+    });
+    const { Data } = resp.data;
+    if (Data?.Status === 200) setUserData(Data.User);
+    console.log(Data);
+    event.detail.complete();
+  };
   return (
     <>
       <ContactModal
@@ -32,6 +46,9 @@ export default function UserHome() {
       <IonPage style={{ direction: currentLang === "ar" ? "rtl" : "ltr" }}>
         {user?.Id && (
           <IonContent className="user-home-bg">
+            <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+              <IonRefresherContent> </IonRefresherContent>
+            </IonRefresher>
             <div className="top-bg">
               <div className="top-nav">
                 <div>
@@ -72,7 +89,7 @@ export default function UserHome() {
                   color="tertiary"
                   style={{ fontSize: "1.7em", fontWeight: "bold" }}
                 >
-                  {user.walts} Watts
+                  {user.walts} {strings.watts.title}
                 </IonText>
               </div>
             </div>

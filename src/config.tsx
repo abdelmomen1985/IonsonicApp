@@ -1,6 +1,7 @@
 const config = {
   API_URL: "http://13.90.214.197:881/api/",
-  PROXY_POST: "http://13.90.214.197:8081/hrback/public/api/",
+  // PROXY_POST: "http://13.90.214.197:8081/hrback/public/api/",
+  ORIG_URL: "http://35.222.62.254:881/api/",
   // TODO: make them dynamic [later]
   LANG_CODES: {
     ar: {
@@ -57,6 +58,16 @@ const config = {
         ],
       },
     ],
+  },
+  marital_status: {
+    1: {
+      ar_name: "اعزب",
+      en_name: "Single",
+    },
+    2: {
+      ar_name: "متزوج",
+      en_name: "Married",
+    },
   },
   contact_us_types: {
     1: {

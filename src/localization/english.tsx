@@ -7,6 +7,9 @@ const english = {
     my_vouchers: "My Vouchers",
     my_gifts: "My Gifts",
     av_gifts_vouchers: "Avilable Gifts & Vouchers",
+    vouchers: " Vouchers ",
+    gifts: "Gifts",
+    panasonic_products: " Panasonic Products",
     notifications: "Notifications",
     change_langauge: "Change Langauge",
     get_started: "Get Started",
@@ -18,6 +21,8 @@ const english = {
     close: "Close",
     send: "Send",
     no_notifications: "There are no new notifications",
+    expiry_date: "Expiry Date ",
+    redeem: "Redeem",
   },
   slider: {
     next: "Next",

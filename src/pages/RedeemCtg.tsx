@@ -1,29 +1,18 @@
 import React, { useContext } from "react";
-import {
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonMenuToggle,
-  IonIcon,
-  IonTitle,
-  IonContent,
-  IonCard,
-  IonCardTitle,
-} from "@ionic/react";
+import { IonPage, IonContent, IonCard, IonCardTitle } from "@ionic/react";
 import { AppCtxt } from "../Context";
-import { cardOutline } from "ionicons/icons";
 import { strings } from "../localization/localization";
-import menuIcon from "../images/left_menu.png";
 import Footer from "../components/Footer";
 import panasonic from "../images/panasonic.png";
 import gifts from "../images/gifts.png";
 import vouchers from "../images/vouchers.png";
+import EveryHeader from "../components/EveryHeader";
 
 export default function RedeemCtg() {
   const { currentLang } = useContext(AppCtxt);
   return (
     <IonPage style={{ direction: currentLang === "ar" ? "rtl" : "ltr" }}>
+      {/*
       <IonHeader>
         <IonToolbar color="dark" className="main-toolbar">
           <IonButtons slot="start">
@@ -37,11 +26,13 @@ export default function RedeemCtg() {
           <IonTitle> {strings.offers.redeem} </IonTitle>
         </IonToolbar>
       </IonHeader>
+      */}
+      <EveryHeader title={strings.offers.redeem} />
       <IonContent className="redeem-ctg-bg">
-        <IonCard className="ion-text-center" routerLink="/redeem/panasonic">
+        <IonCard className="ion-text-center" routerLink="/redeem/p_products">
           <img src={panasonic} alt="" style={{ maxWidth: "65%" }} />
           <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
-            Panasonic Products
+            {strings.main.panasonic_products}
           </IonCardTitle>
         </IonCard>
 
@@ -52,7 +43,7 @@ export default function RedeemCtg() {
             style={{ maxWidth: "80%", marginTop: ".5em" }}
           />
           <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
-            Gifts{" "}
+            {strings.main.gifts}
           </IonCardTitle>
         </IonCard>
 
@@ -63,7 +54,7 @@ export default function RedeemCtg() {
             style={{ maxWidth: "80%", marginTop: ".5em" }}
           />
           <IonCardTitle style={{ paddingBottom: ".5em" }} color="tertiary">
-            Vouchers
+            {strings.main.vouchers}
           </IonCardTitle>
         </IonCard>
       </IonContent>

@@ -17,6 +17,22 @@ export type UserType = {
   walts: string;
 };
 
+export type AppDataType = {
+  Banners: [{ Image: string; Name: string; Id: number }];
+  ContactUs: {
+    Activity: string;
+    Address: string;
+    Description: string;
+    Email: string;
+    Name: string;
+    Fax: string;
+    Phone: string;
+  };
+  HowItWork: string;
+  Privacy: string;
+  TermAndConditions: string;
+};
+
 export type OfferType = {
   Id: number;
   Description: string;
@@ -36,12 +52,38 @@ export type AreaType = {
   Latitude: number;
 };
 
+export type BranchType = {
+  Id: number;
+  Name: string;
+  AreaId: number;
+  AreaName: string;
+  BranchManager: string;
+  Description: string;
+  Icon: string;
+  Image: string;
+  Mobile: string;
+  Phone: string;
+  Longitude: number;
+  Latitude: number;
+};
+
 export type ContactUsType = {
   Id: number;
   UserName: string;
   TypeId: number;
   Details: string;
   Images: [{ Image: string }];
+};
+
+export type GiftItem = {
+  id: number;
+  name: string;
+  description: string;
+  expire_date: string;
+  image: string;
+  // TODO remove [later]
+  walts: number;
+  type: string;
 };
 
 export type NewsType = {
