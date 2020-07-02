@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { IonPage, IonContent } from "@ionic/react";
+import { IonPage, IonContent, IonSpinner } from "@ionic/react";
 import { RouteComponentProps } from "react-router-dom";
 import { strings } from "../../localization/localization";
 import EveryHeader from "../../components/EveryHeader";
@@ -58,7 +58,13 @@ export default function SideInfo({ match }: RouteComponentProps) {
             {JSON.stringify(deviceInfo, null, 2)}
           </pre>
         )}
-        {infoString && <p className="ion-padding ">{infoString}</p>}
+        {infoString ? (
+          <p className="ion-padding ">{infoString}</p>
+        ) : (
+          <div className="ion-padding ">
+            <IonSpinner name="crescent" />
+          </div>
+        )}
       </IonContent>
       <Footer current="" />
     </IonPage>

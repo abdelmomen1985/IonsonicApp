@@ -23,6 +23,7 @@ const arabic = {
     no_notifications: "لا يوجد اشعارات جديدة",
     expiry_date: "تاريخ الانتهاء",
     redeem: "استبدال",
+    show: "عـرض",
   },
   slider: {
     next: "التالي",

@@ -23,6 +23,7 @@ const english = {
     no_notifications: "There are no new notifications",
     expiry_date: "Expiry Date ",
     redeem: "Redeem",
+    show: "Show",
   },
   slider: {
     next: "Next",
