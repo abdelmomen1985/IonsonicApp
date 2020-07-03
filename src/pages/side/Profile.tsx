@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import {
   IonPage,
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonMenuToggle,
   IonIcon,
   IonList,
   IonItem,
@@ -13,7 +9,7 @@ import {
   IonContent,
 } from "@ionic/react";
 import { AppCtxt } from "../../Context";
-import { cameraOutline } from "ionicons/icons";
+import { cameraOutline, createOutline } from "ionicons/icons";
 import avatarImg from "../../images/avatar.png";
 
 import { strings } from "../../localization/localization";
@@ -21,9 +17,12 @@ import Footer from "../../components/Footer";
 import config from "../../config";
 import EveryHeader from "../../components/EveryHeader";
 import { getMaritalStatus } from "../../utils/functions";
+import { useHistory } from "react-router-dom";
 
 export default function Profile() {
   const { currentLang, user } = useContext(AppCtxt);
+  const history = useHistory();
+
   const changeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     // this.setState({ uploading: true })
@@ -71,6 +70,10 @@ export default function Profile() {
       }
     }
   };
+
+  const editProfile = async () => {
+    history.push("/edit_profile");
+  };
   return (
     <IonPage
       style={{
@@ -92,9 +95,19 @@ export default function Profile() {
         </IonToolbar>
       </IonHeader>
       */}
-      <EveryHeader title={strings.menu.profile} />
+      <EveryHeader title={strings.menu.profile} backInstead={true}>
+        <IonIcon
+          icon={createOutline}
+          color="light"
+          style={{ fontSize: "1.2em" }}
+          onClick={editProfile}
+        />
+      </EveryHeader>
       <IonContent>
-        <div className="ion-text-center">
+        <div
+          className="ion-text-center"
+          style={{ maxHeight: "25vh", overflow: "hidden" }}
+        >
           <div
             className="avatar-img"
             style={{

@@ -24,6 +24,7 @@ const english = {
     expiry_date: "Expiry Date ",
     redeem: "Redeem",
     show: "Show",
+    save: "Save",
   },
   slider: {
     next: "Next",
@@ -36,11 +37,21 @@ const english = {
   user: {
     email: "Email",
     password: "Password",
+    confirm_password: "Confirm Password",
     city: "City",
     name: "Name",
     material_status: "Material Status",
     phone: "Phone",
     residency: "Residency",
+    birth_date: "Birth Date",
+    register: "Register",
+    edit_profile: "Edit Profile",
+    accept:
+      "By signing up or logging in to this app, you agree to our Terms &amp; Conditions and Privacy Policy.",
+  },
+  marital_statuses: {
+    single: "Single",
+    marreid: "Marreid",
   },
   watts: {
     title: "Watts",

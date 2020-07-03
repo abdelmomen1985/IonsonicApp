@@ -27,15 +27,36 @@ export default function UserCard() {
             className="ion-text-center "
             style={{ display: "block", paddingTop: "1em", maxWidth: "100%" }}
           >
-            <img src={logoDetails} alt="" style={{ maxWidth: "100%" }} />
+            <img
+              className="ion-margin-top"
+              src={logoDetails}
+              alt=""
+              style={{ maxWidth: "100%" }}
+            />
           </div>
-          <img
-            className="barcode"
-            src={"https://i.imgur.com/pyPn113.jpg"}
-            alt=""
-            style={{ width: "100%", maxHeight: "70px" }}
-          />
-          <div className="ion-padding-bottom">
+          <div
+            className="ion-margin-top"
+            style={{
+              backgroundColor: "white",
+              height: "60px",
+              overflow: "hidden",
+            }}
+          >
+            <img
+              className="barcode"
+              src={`https://barcode.tec-it.com/barcode.ashx?data=pana000${user.Id}`}
+              alt=""
+              style={{ width: "90%", maxHeight: "70px" }}
+            />
+          </div>
+          <div
+            style={{
+              backgroundColor: "white",
+              height: "10px",
+            }}
+          ></div>
+
+          <div className="ion-padding-bottom ion-margin-top">
             <IonText color="light" style={{ fontSize: "larger" }}>
               {user.FirstName} {user.LastName}
             </IonText>

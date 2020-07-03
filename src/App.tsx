@@ -43,6 +43,7 @@ import SingleMap from "./pages/SingleMap";
 import NewsAndTips from "./pages/NewsAndTips";
 import UserCard from "./pages/UserCard";
 import RedeemItems from "./pages/RedeemItems";
+import EditProfile from "./pages/EditProfile";
 
 const App: React.FC = () => {
   const { currentLang } = useContext(AppCtxt);
@@ -72,6 +73,7 @@ const App: React.FC = () => {
             <Route path="/transactions" component={UserTransactions} />
             {/** side menu */}
             <Route path="/profile" component={Profile} />
+            <Route path="/edit_profile" component={EditProfile} />
             <Route path="/settings" component={Settings} />
             <Route path="/contact_us" component={ContactUs} />
             <Route path="/tips" component={NewsAndTips} />

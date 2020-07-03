@@ -24,6 +24,7 @@ const arabic = {
     expiry_date: "تاريخ الانتهاء",
     redeem: "استبدال",
     show: "عـرض",
+    save: "حفظ",
   },
   slider: {
     next: "التالي",
@@ -36,11 +37,21 @@ const arabic = {
   user: {
     email: "البريد الالكتروني",
     password: "كلمة المرور",
+    confirm_password: "تأكيد كلمة المرور",
     city: "مدينة",
     name: "الاسم",
     material_status: "الحالة الإجتماعية",
     phone: "الهاتف",
     residency: "معرف الإقامة",
+    birth_date: "تاريخ الميلاد ",
+    register: "تسجيل",
+    edit_profile: "تعديل البيانات",
+    accept:
+      "من خلال الاشتراك أو تسجيل الدخول إلى هذا التطبيق ، فإنك توافق على الشروط والأحكام الخاصة بنا. الشروط وسياسة الخصوصية.",
+  },
+  marital_statuses: {
+    single: "اعزب",
+    marreid: "متزوج",
   },
   watts: {
     title: "وات",
