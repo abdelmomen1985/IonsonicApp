@@ -20,17 +20,26 @@ import { AppCtxt } from "../Context";
 import { useHistory } from "react-router";
 import Footer from "../components/Footer";
 import { UserType } from "../types/types";
+import Axios from "axios";
+import config from "../config";
 
 export default function EditProfile() {
   const [birthDate, setBirthDate] = useState<string>("");
   const [maritalStatusId, setMaritalStatusId] = useState<number>();
-  const { currentLang, user } = useContext(AppCtxt);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [residencyId, setResidencyId] = useState("");
+
+  const { currentLang, user, setUserData } = useContext(AppCtxt);
+  const history = useHistory();
   const doSave = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault();
       const { name, email, phone, residencyId } = e.target as any;
       const newUser = {
-        Id: user.Id,
+        ...user,
         Email: email.value,
         FirstName: name.value,
         LastName: "",
@@ -40,16 +49,45 @@ export default function EditProfile() {
         BirthDate: birthDate,
       } as UserType;
       console.log(user, newUser);
+      const formData = new FormData();
+      formData.append("Id", "" + newUser.Id);
+      formData.append("FirstName", newUser.FirstName);
+      formData.append("LastName", " ");
+      formData.append("BirthDate", newUser.BirthDate);
+      formData.append("Phone", newUser.Phone);
+      formData.append("Email", newUser.Email);
+      formData.append("Password", "" + newUser.Password);
+      formData.append("CityId", "" + newUser.CityId);
+      formData.append("ResidencyId", newUser.ResidencyId);
+      formData.append("MaterialStatusId", "" + newUser.MaterialStatusId);
+      formData.append("Image", "" + newUser.ProfileImage);
+
+      const resp = await Axios.post(
+        `${config.API_URL}ManageCustomer/UpdateCustomer`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      let { Data } = resp.data;
+      if (Data && Data.Status === 200) {
+        setUserData(Data.User);
+        history.goBack();
+      }
     },
-    [maritalStatusId, birthDate, user]
+    [maritalStatusId, birthDate]
   );
 
   useEffect(() => {
     setBirthDate(user.BirthDate);
     setMaritalStatusId(+user.MaterialStatusId);
+    setName(user.FirstName + " " + user.LastName);
+    setEmail(user.Email);
+    setPhone(user.Phone);
+    setResidencyId(user.ResidencyId);
   }, [user]);
-
-  const history = useHistory();
 
   return (
     <IonPage
@@ -65,7 +103,8 @@ export default function EditProfile() {
               <IonInput
                 type="text"
                 name="name"
-                value={user.FirstName + " " + user.LastName}
+                value={name}
+                onIonChange={(e) => setName(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.name}
               />
@@ -74,7 +113,8 @@ export default function EditProfile() {
               <IonInput
                 type="email"
                 name="email"
-                value={user.Email}
+                value={email}
+                onIonChange={(e) => setEmail(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.email}
               />
@@ -85,7 +125,8 @@ export default function EditProfile() {
                 style={{ direction: "ltr" }}
                 type="tel"
                 name="phone"
-                value={user.Phone}
+                value={phone}
+                onIonChange={(e) => setPhone(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.phone}
               />
@@ -95,7 +136,8 @@ export default function EditProfile() {
               <IonInput
                 type="text"
                 name="residencyId"
-                value={user.ResidencyId}
+                value={residencyId}
+                onIonChange={(e) => setResidencyId(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.residency}
               />

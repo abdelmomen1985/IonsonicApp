@@ -20,6 +20,7 @@ const initialState = {
   appData: localStorage.getItem("AppData")
     ? (JSON.parse(localStorage.getItem("AppData")!) as AppDataType)
     : null,
+  loggedIn: false,
   setCurrentLang: (lang: string) => {},
   setUserData: (user: UserType) => {},
   setAppData: (data: AppDataType) => {},
@@ -31,11 +32,10 @@ function appReducer(state: any, action: any) {
   switch (action.type) {
     case ACTION_TYPES.USER_LOGGED_IN:
       let { user } = action;
-      bugy("USER_LOGGED_IN");
-      bugy(user);
       return {
         ...state,
         user,
+        loggedIn: true,
       };
     case ACTION_TYPES.CHANGE_CURRENT_LANG:
       const { currentLang } = action;
@@ -80,6 +80,7 @@ function CtxtProvider(props: any) {
         currentLang: state.currentLang,
         user: state.user,
         appData: state.appData,
+        loggedIn: state.loggedIn,
         setUserData,
         setCurrentLang,
         setAppData,

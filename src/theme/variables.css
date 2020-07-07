@@ -296,7 +296,7 @@ ion-content.reg-bg {
 
 .user-avatar {
   position: relative;
-  margin-top: 10vh;
+  margin-top: 8vh;
 }
 
 .title {
@@ -441,7 +441,7 @@ ion-toolbar.profile-toolbar {
   left: 0;
   width: 100%;
   height: 100%;
-  margin-top: 60%;
+  margin-top: 70px;
   font-size: 2.5em;
   z-index: 3;
 }

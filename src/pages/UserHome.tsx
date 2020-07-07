@@ -7,6 +7,7 @@ import {
   IonPage,
   IonRefresher,
   IonRefresherContent,
+  IonIcon,
 } from "@ionic/react";
 import avatarImg from "../images/avatar.png";
 import menuIcon from "../images/left_menu.png";
@@ -19,6 +20,7 @@ import ContactModal from "../components/ContactModal";
 import { RefresherEventDetail } from "@ionic/core";
 import Axios from "axios";
 import config from "../config";
+import { radioButtonOff, radioButtonOnOutline } from "ionicons/icons";
 
 export default function UserHome() {
   const { currentLang, user, setUserData } = useContext(AppCtxt);
@@ -57,7 +59,11 @@ export default function UserHome() {
                   </IonMenuToggle>
                 </div>
 
-                <IonButton fill="clear" routerLink="/user_card">
+                <IonButton
+                  fill="clear"
+                  routerLink="/user_card"
+                  style={{ margin: "0px", marginTop: "-5px" }}
+                >
                   <img src={cardIcon} alt="" />
                 </IonButton>
               </div>
@@ -68,16 +74,44 @@ export default function UserHome() {
                 <IonText color="light" style={{ fontSize: "larger" }}>
                   {user.FirstName} {user.LastName}
                 </IonText>
+                <br />
+                <div className="ion-margin-top">
+                  <IonText color="light">
+                    {strings.user.account_status}{" "}
+                  </IonText>
+                  <span>&nbsp;</span>
+                  {user.walts ? (
+                    <>
+                      <IonIcon icon={radioButtonOnOutline} color="success" />
+                      <span>&nbsp;</span>
+                      <IonText color="success">
+                        {strings.account_statuses.active}
+                      </IonText>
+                    </>
+                  ) : (
+                    <>
+                      <IonIcon icon={radioButtonOnOutline} color="danger" />
+                      <span>&nbsp;</span>
+                      <IonText color="danger">
+                        {strings.account_statuses.stopped}
+                      </IonText>
+                    </>
+                  )}
+                </div>
               </div>
               <div className="avatar-img">
                 {user?.ProfileImage ? (
                   <img
                     src={user.ProfileImage}
                     alt=""
-                    style={{ maxWidth: "140%" }}
+                    style={{ maxWidth: "140%", maxHeight: "200px" }}
                   />
                 ) : (
-                  <img src={avatarImg} alt="" style={{ maxWidth: "140%" }} />
+                  <img
+                    src={avatarImg}
+                    alt=""
+                    style={{ maxWidth: "140%", maxHeight: "200px" }}
+                  />
                 )}
               </div>
             </div>

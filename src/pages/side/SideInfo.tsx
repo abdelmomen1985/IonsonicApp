@@ -17,7 +17,7 @@ export default function SideInfo({ match }: RouteComponentProps) {
   const { currentLang, appData, setAppData } = useContext(AppCtxt);
 
   const [deviceInfo, setDeviceInfo] = useState({});
-  const [infoString, SetInfoString] = useState("");
+  const [infoString, setInfoString] = useState("");
   const menuStrings = (strings as any).menu;
   const title = match.path.replace("/", "");
   useEffect(() => {
@@ -41,11 +41,11 @@ export default function SideInfo({ match }: RouteComponentProps) {
 
     if (title === "help") getDeviceInfo();
     else if (title === "privacy") {
-      SetInfoString("" + appData?.Privacy);
+      setInfoString("" + appData?.Privacy);
     } else if (title === "terms") {
-      SetInfoString("" + appData?.TermAndConditions);
+      setInfoString("" + appData?.TermAndConditions);
     } else if (title === "how") {
-      SetInfoString("" + appData?.HowItWork);
+      setInfoString("" + appData?.HowItWork);
     }
   }, [title, appData, setAppData, currentLang]);
 
@@ -58,13 +58,7 @@ export default function SideInfo({ match }: RouteComponentProps) {
             {JSON.stringify(deviceInfo, null, 2)}
           </pre>
         )}
-        {infoString ? (
-          <p className="ion-padding ">{infoString}</p>
-        ) : (
-          <div className="ion-padding ">
-            <IonSpinner name="crescent" />
-          </div>
-        )}
+        {infoString && <p className="ion-padding ">{infoString}</p>}
       </IonContent>
       <Footer current="" />
     </IonPage>

@@ -3,7 +3,7 @@ export type UserType = {
   Email: string;
   Password: string;
   BirthDate: string;
-  CityId: string;
+  CityId: number;
   FirstName: string;
   LastName: string;
   MaterialStatusId: number;

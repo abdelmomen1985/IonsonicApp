@@ -46,12 +46,17 @@ const english = {
     birth_date: "Birth Date",
     register: "Register",
     edit_profile: "Edit Profile",
+    account_status: "Account Status",
     accept:
       "By signing up or logging in to this app, you agree to our Terms &amp; Conditions and Privacy Policy.",
   },
   marital_statuses: {
     single: "Single",
     marreid: "Marreid",
+  },
+  account_statuses: {
+    active: "Active",
+    stopped: "Stopped",
   },
   watts: {
     title: "Watts",

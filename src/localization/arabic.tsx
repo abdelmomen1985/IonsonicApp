@@ -46,8 +46,13 @@ const arabic = {
     birth_date: "تاريخ الميلاد ",
     register: "تسجيل",
     edit_profile: "تعديل البيانات",
+    account_status: "حالة الحساب",
     accept:
       "من خلال الاشتراك أو تسجيل الدخول إلى هذا التطبيق ، فإنك توافق على الشروط والأحكام الخاصة بنا. الشروط وسياسة الخصوصية.",
+  },
+  account_statuses: {
+    active: "نشط",
+    stopped: "متوقف",
   },
   marital_statuses: {
     single: "اعزب",
@@ -70,7 +75,7 @@ const arabic = {
     tips: "اخبار ومعلومات",
     how: " كيف تعمل ",
     terms: " البنود و الظروف ",
-    privacy: " سياسة خاصة ",
+    privacy: " سياسة الخصوصية",
     help: " جهاز / مساعدة",
     logout: " الخروج ",
     settings: "الإعدادات ",

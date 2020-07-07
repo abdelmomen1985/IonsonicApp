@@ -8,10 +8,13 @@ import {
   IonText,
 } from "@ionic/react";
 import { strings } from "../localization/localization";
+import { UserType } from "../types/types";
+import Axios from "axios";
+import config from "../config";
 
 export default function RegisterForm() {
-  const [selectedDate, setSelectedDate] = useState<string>("");
-  const [marital, setMarital] = useState<number>();
+  const [birthDate, setBirthDate] = useState<string>("");
+  const [maritalStatusId, setMaritalStatusId] = useState<number>();
   const doRegister = useCallback(async (e: SyntheticEvent) => {
     e.preventDefault();
     const {
@@ -19,12 +22,33 @@ export default function RegisterForm() {
       email,
       password,
       confirmPassword,
-      phone,
-      residencyId,
-      birthDate,
       materialStatusId,
+      phone,
+      birthDate,
+      residencyId,
     } = e.target as any;
-    console.log(name.value);
+
+    // First Check Data
+
+    const newUser = {
+      FirstName: name.value,
+      LastName: " ",
+      Email: email.value,
+      Password: password.value,
+      Phone: phone.value,
+      ResidencyId: residencyId.value,
+      BirthDate: birthDate.value,
+      MaterialStatusId: materialStatusId.value,
+      CityId: 1,
+    } as UserType;
+
+    let resp = await Axios.post(
+      `${config.API_URL}ManageCustomer/CreateCustomer`,
+      newUser
+    );
+    console.log(newUser);
+    let { Data } = resp.data;
+    console.log(Data);
   }, []);
   return (
     <div>
@@ -87,18 +111,18 @@ export default function RegisterForm() {
             displayFormat="DD-MM-YYYY"
             name="birthDate"
             placeholder={strings.user.birth_date}
-            value={selectedDate}
+            value={birthDate}
             className="reg-input"
-            onIonChange={(e) => setSelectedDate(e.detail.value!)}
+            onIonChange={(e) => setBirthDate(e.detail.value!)}
           ></IonDatetime>
         </div>
         <div className="reg-element">
           <IonSelect
-            value={marital}
+            value={maritalStatusId}
             placeholder={strings.user.material_status}
             name="materialStatusId"
             className="reg-input"
-            onIonChange={(e) => setMarital(e.detail.value)}
+            onIonChange={(e) => setMaritalStatusId(e.detail.value)}
           >
             <IonSelectOption value="1">
               {strings.marital_statuses.single}
