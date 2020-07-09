@@ -19,6 +19,7 @@ export default function UserTransactions() {
     <IonPage style={{ direction: currentLang === "ar" ? "rtl" : "ltr" }}>
       <EveryHeader title={strings.main.my_transactions} />
       <IonContent>
+        {/** 
         <IonCard>
           <IonCardHeader color="tertiary">
             <IonText className="c-head-text" color="light">
@@ -48,6 +49,7 @@ export default function UserTransactions() {
           <IonCardSubtitle class="ion-padding"> 2018/07/02 </IonCardSubtitle>
           <IonCardContent>اسم الصنف</IonCardContent>
         </IonCard>
+        */}
       </IonContent>
       <Footer current="" />
     </IonPage>

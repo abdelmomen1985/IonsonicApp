@@ -8,9 +8,10 @@
 ## To build app in android
 
 - https://capacitor.ionicframework.com/docs/getting-started/with-ionic
-- build your Ionic project `ionic build`
+- build your Ionic project `ionic build` OR `ionic build --prod`
 - Synicing app with capacitor `npx cap copy`
 - Open IDE / Studio `npx cap open android`
+- Run full build b4 sending apk
 
 ## inspect remotely
 

@@ -30,6 +30,7 @@ import { AppCtxt } from "../Context";
 interface AppMenuProps {
   lang: string;
 }
+
 export default function AppMenu({ lang }: AppMenuProps) {
   const history = useHistory();
   const { user } = useContext(AppCtxt);
@@ -86,10 +87,7 @@ export default function AppMenu({ lang }: AppMenuProps) {
               <IonIcon slot="start" icon={callOutline} color="tertiary" />
               <IonLabel>{strings.menu.contact}</IonLabel>
             </IonItem>
-            <IonItem routerLink="/help">
-              <IonIcon slot="start" icon={helpBuoyOutline} color="tertiary" />
-              <IonLabel>{strings.menu.help}</IonLabel>
-            </IonItem>
+
             <IonItem routerLink="/terms">
               <IonIcon
                 slot="start"
@@ -116,7 +114,7 @@ export default function AppMenu({ lang }: AppMenuProps) {
                 onClick={() => {
                   // Log out and clear localStorage
                   localStorage.clear();
-                  history.push("/");
+                  history.replace("/");
                   window.location.reload(false);
                 }}
               >
@@ -124,6 +122,11 @@ export default function AppMenu({ lang }: AppMenuProps) {
                 <IonLabel>{strings.menu.logout}</IonLabel>
               </IonItem>
             )}
+
+            <IonItem routerLink="/help">
+              <IonIcon slot="start" icon={helpBuoyOutline} color="tertiary" />
+              <IonLabel>{strings.menu.help}</IonLabel>
+            </IonItem>
           </IonList>
         </IonMenuToggle>
       </IonContent>

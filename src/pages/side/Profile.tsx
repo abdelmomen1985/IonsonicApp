@@ -115,7 +115,10 @@ export default function Profile() {
               boxShadow: "1px 2px 2px rgba(182, 30, 30, 0.3)",
             }}
           >
-            <label htmlFor="file-input">
+            <label
+              htmlFor="file-input"
+              style={{ minWidth: "50%", height: "100%" }}
+            >
               <div className="imglabel-wrap">
                 {user.ProfileImage ? (
                   <img

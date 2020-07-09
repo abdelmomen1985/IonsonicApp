@@ -73,6 +73,60 @@ http://ionicframework.com/docs/theming/ */
 
   /** custom **/
   --pana-titles-color: #f4f5f8;
+
+  /** blue **/
+
+  --ion-color-blue: #537bff;
+  --ion-color-blue-rgb: 83, 123, 255;
+  --ion-color-blue-contrast: #ffffff;
+  --ion-color-blue-contrast-rgb: 255, 255, 255;
+  --ion-color-blue-shade: #496ce0;
+  --ion-color-blue-tint: #6488ff;
+
+  /** silver **/
+
+  --ion-color-silver: #c0c0c0;
+  --ion-color-silver-rgb: 192, 192, 192;
+  --ion-color-silver-contrast: #000000;
+  --ion-color-silver-contrast-rgb: 0, 0, 0;
+  --ion-color-silver-shade: #a9a9a9;
+  --ion-color-silver-tint: #c6c6c6;
+
+  /** platinum **/
+
+  --ion-color-platinum: #e5e4e2;
+  --ion-color-platinum-rgb: 229, 228, 226;
+  --ion-color-platinum-contrast: #000000;
+  --ion-color-platinum-contrast-rgb: 0, 0, 0;
+  --ion-color-platinum-shade: #cac9c7;
+  --ion-color-platinum-tint: #e8e7e5;
+}
+
+.ion-color-blue {
+  --ion-color-base: var(--ion-color-blue);
+  --ion-color-base-rgb: var(--ion-color-blue-rgb);
+  --ion-color-contrast: var(--ion-color-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-blue-shade);
+  --ion-color-tint: var(--ion-color-blue-tint);
+}
+
+.ion-color-silver {
+  --ion-color-base: var(--ion-color-silver);
+  --ion-color-base-rgb: var(--ion-color-silver-rgb);
+  --ion-color-contrast: var(--ion-color-silver-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-silver-contrast-rgb);
+  --ion-color-shade: var(--ion-color-silver-shade);
+  --ion-color-tint: var(--ion-color-silver-tint);
+}
+
+.ion-color-platinum {
+  --ion-color-base: var(--ion-color-platinum);
+  --ion-color-base-rgb: var(--ion-color-platinum-rgb);
+  --ion-color-contrast: var(--ion-color-platinum-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-platinum-contrast-rgb);
+  --ion-color-shade: var(--ion-color-platinum-shade);
+  --ion-color-tint: var(--ion-color-platinum-tint);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -286,12 +340,35 @@ ion-content.reg-bg {
   margin-top: 2vh;
   border-radius: 50%;
   margin-bottom: 10px;
-  border: 8px solid #c5a43e;
+
   display: inline-flex;
   align-content: center;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 100px #2020202e inset, 0 0 5px #00000080;
+  border-radius: 2rem !important;
+}
+.blue-border {
+  border: 8px solid var(--ion-color-blue);
+}
+
+.gold-border {
+  border: 8px solid var(--ion-color-tertiary);
+}
+
+.silver-border {
+  border: 8px solid var(--ion-color-silver);
+}
+
+.platinum-border {
+  border: 8px solid var(--ion-color-platinum);
 }
 
 .user-avatar {

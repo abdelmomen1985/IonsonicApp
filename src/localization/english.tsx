@@ -25,6 +25,7 @@ const english = {
     redeem: "Redeem",
     show: "Show",
     save: "Save",
+    success_redeem: "Redeem Done Successfuly !",
   },
   slider: {
     next: "Next",
@@ -33,6 +34,13 @@ const english = {
     title: "Login Now",
     already_a_member: "Already a member",
     register_text: "Don't have an account ? Register Now",
+    mismatch_password: "Mismatch Password",
+    contain_space: "Password should not contain spaces",
+    should_select_marital_status: "Should Select Marital Status",
+    user_must_be_older_than_18_years: "User must be older than 18 years",
+    email_error: "Email Was Registered ",
+    register_done_successfuly:
+      "Register Done Successfuly, You will be redirected to login page",
   },
   user: {
     email: "Email",
@@ -76,7 +84,7 @@ const english = {
     tips: "News and tips",
     terms: " Terms & conditions",
     privacy: " Privacy policy",
-    help: " Device / Hints",
+    help: "About Application",
     logout: " Logout",
     settings: "Settings",
   },

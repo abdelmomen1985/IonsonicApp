@@ -1,6 +1,9 @@
 import LocalizedStrings from "react-localization";
 import arabic from "./arabic";
 import english from "./english";
+import ur from "./ur";
+import hi from "./hi";
+import bn from "./bn";
 
 const setLanguage = (reload: boolean = false) => {
   const currentLanguage = localStorage.getItem("lang");
@@ -16,6 +19,9 @@ const setLanguage = (reload: boolean = false) => {
 const strings = new LocalizedStrings({
   en: english,
   ar: arabic,
+  ur: ur,
+  hi: hi,
+  bn: bn,
 });
 
 const language = localStorage.getItem("lang");

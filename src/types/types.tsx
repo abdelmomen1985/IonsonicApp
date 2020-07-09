@@ -15,6 +15,7 @@ export type UserType = {
   ResidencyId: string;
   // TODO remove [later]
   walts: string;
+  type: string;
 };
 
 export type AppDataType = {
@@ -84,6 +85,7 @@ export type GiftItem = {
   // TODO remove [later]
   walts: number;
   type: string;
+  CRUD: string;
 };
 
 export type NewsType = {

@@ -99,7 +99,7 @@ export default function UserHome() {
                   )}
                 </div>
               </div>
-              <div className="avatar-img">
+              <div className={`avatar-img ${user.type}-border`}>
                 {user?.ProfileImage ? (
                   <img
                     src={user.ProfileImage}

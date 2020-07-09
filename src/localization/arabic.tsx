@@ -25,6 +25,7 @@ const arabic = {
     redeem: "استبدال",
     show: "عـرض",
     save: "حفظ",
+    success_redeem: "تم الاستبدال بنجاح",
   },
   slider: {
     next: "التالي",
@@ -33,6 +34,13 @@ const arabic = {
     title: "تسجيل الدخول",
     already_a_member: "عضوا فعلا",
     register_text: " ليس لديك حساب؟ سجل الآن ",
+    mismatch_password: "كلمة المرور غير متطابقة",
+    contain_space: "لا يجب ان تحتوي كلمة المرور علي مسافات",
+    should_select_marital_status: "يجب اختيار الحالة الاجتماعية",
+    user_must_be_older_than_18_years: "يجب ان يكون المستخدم اكبر من 18 عام",
+    email_error: "تم استخدام هذا البريد الالكتروني مسبقاً",
+    register_done_successfuly:
+      "تم تسجيل المستخدم بنجاح سيتم تحويلك لشاشة تسجيل الدخول",
   },
   user: {
     email: "البريد الالكتروني",
@@ -74,9 +82,9 @@ const arabic = {
     contact: "اتصل بنا",
     tips: "اخبار ومعلومات",
     how: " كيف تعمل ",
-    terms: " البنود و الظروف ",
+    terms: " البنود والظروف ",
     privacy: " سياسة الخصوصية",
-    help: " جهاز / مساعدة",
+    help: "حول التطبيق",
     logout: " الخروج ",
     settings: "الإعدادات ",
   },

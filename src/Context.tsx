@@ -64,6 +64,13 @@ function CtxtProvider(props: any) {
   }
 
   function setUserData(user: UserType) {
+    const typeSwitch = (watts: number) => {
+      if (watts >= 0 && watts < 25000) return "blue";
+      else if (watts >= 25000 && watts < 50000) return "silver";
+      else if (watts >= 50000 && watts < 75000) return "gold";
+      else if (watts > 75000) return "platinum";
+    };
+    user.type = typeSwitch(+user.walts)!;
     localStorage.setItem("UserData", JSON.stringify(user));
     dispatch({ user, type: ACTION_TYPES.USER_LOGGED_IN });
   }

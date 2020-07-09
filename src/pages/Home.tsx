@@ -8,6 +8,7 @@ import { AppCtxt } from "../Context";
 import { UserType } from "../types/types";
 import Axios from "axios";
 import config from "../config";
+import { Plugins, Capacitor } from "@capacitor/core";
 
 //import ExploreContainer from "../components/ExploreContainer";
 
@@ -15,6 +16,25 @@ const Home: React.FC = () => {
   const history = useHistory();
   const userData = localStorage.getItem("UserData");
   const { loggedIn, setUserData } = useContext(AppCtxt);
+
+  // Listener back-button
+  useEffect(() => {
+    if (Capacitor.isNative) {
+      Plugins.App.addListener("backButton", (e) => {
+        // Use of location.pathname is also correct
+        if (
+          window.location.pathname === "/" ||
+          window.location.pathname === "/home"
+        ) {
+          Plugins.App.exitApp();
+        } else if (window.location.pathname === "/detail") {
+          history.push("/");
+        } else {
+          history.goBack();
+        }
+      });
+    }
+  }, []);
 
   // TODO : no internet [later]
   useEffect(() => {

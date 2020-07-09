@@ -13,6 +13,9 @@ import {
   IonInput,
   IonPage,
   IonContent,
+  IonChip,
+  IonIcon,
+  IonLabel,
 } from "@ionic/react";
 import { strings } from "../localization/localization";
 import EveryHeader from "../components/EveryHeader";
@@ -22,10 +25,14 @@ import Footer from "../components/Footer";
 import { UserType } from "../types/types";
 import Axios from "axios";
 import config from "../config";
+import moment from "moment";
+import { alertCircleOutline } from "ionicons/icons";
 
 export default function EditProfile() {
   const [birthDate, setBirthDate] = useState<string>("");
   const [maritalStatusId, setMaritalStatusId] = useState<number>();
+
+  const [validationErrors, setValidationErrors] = useState<any>({});
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -49,6 +56,13 @@ export default function EditProfile() {
         BirthDate: birthDate,
       } as UserType;
       console.log(user, newUser);
+      // Verify at first
+
+      if (!birthDate || moment(birthDate).year() > 2002) {
+        setValidationErrors({ user_must_be_older_than_18_years: true });
+        return;
+      }
+
       const formData = new FormData();
       formData.append("Id", "" + newUser.Id);
       formData.append("FirstName", newUser.FirstName);
@@ -83,7 +97,7 @@ export default function EditProfile() {
   useEffect(() => {
     setBirthDate(user.BirthDate);
     setMaritalStatusId(+user.MaterialStatusId);
-    setName(user.FirstName + " " + user.LastName);
+    setName((user.FirstName + " " + user.LastName).trim());
     setEmail(user.Email);
     setPhone(user.Phone);
     setResidencyId(user.ResidencyId);
@@ -103,6 +117,7 @@ export default function EditProfile() {
               <IonInput
                 type="text"
                 name="name"
+                required
                 value={name}
                 onIonChange={(e) => setName(e.detail.value!)}
                 className="reg-input"
@@ -114,6 +129,7 @@ export default function EditProfile() {
                 type="email"
                 name="email"
                 value={email}
+                required
                 onIonChange={(e) => setEmail(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.email}
@@ -137,12 +153,22 @@ export default function EditProfile() {
                 type="text"
                 name="residencyId"
                 value={residencyId}
+                required
                 onIonChange={(e) => setResidencyId(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.residency}
               />
             </div>
+
             <div className="reg-element">
+              {validationErrors?.user_must_be_older_than_18_years && (
+                <IonChip color="danger" style={{ backgroundColor: "#dedede" }}>
+                  <IonIcon icon={alertCircleOutline} />
+                  <IonLabel>
+                    {strings.login.user_must_be_older_than_18_years}
+                  </IonLabel>
+                </IonChip>
+              )}
               <IonDatetime
                 displayFormat="DD-MM-YYYY"
                 name="birthDate"
