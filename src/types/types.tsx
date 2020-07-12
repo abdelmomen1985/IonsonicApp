@@ -16,6 +16,7 @@ export type UserType = {
   // TODO remove [later]
   walts: string;
   type: string;
+  active: boolean;
 };
 
 export type AppDataType = {
@@ -103,5 +104,5 @@ export type NewsType = {
   DescBng: string;
   CreatedDate: string;
 
-  Images: [{ Image: string }];
+  NewsImages: [{ Image: string }];
 };

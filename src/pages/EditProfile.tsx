@@ -91,16 +91,19 @@ export default function EditProfile() {
         history.goBack();
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [maritalStatusId, birthDate]
   );
 
   useEffect(() => {
-    setBirthDate(user.BirthDate);
-    setMaritalStatusId(+user.MaterialStatusId);
-    setName((user.FirstName + " " + user.LastName).trim());
-    setEmail(user.Email);
-    setPhone(user.Phone);
-    setResidencyId(user.ResidencyId);
+    if (user) {
+      setBirthDate(user.BirthDate);
+      setMaritalStatusId(+user.MaterialStatusId);
+      setName((user.FirstName + " " + user.LastName).trim());
+      setEmail(user.Email);
+      setPhone(user.Phone);
+      setResidencyId(user.ResidencyId);
+    }
   }, [user]);
 
   return (

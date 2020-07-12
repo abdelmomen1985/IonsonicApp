@@ -33,7 +33,7 @@ interface AppMenuProps {
 
 export default function AppMenu({ lang }: AppMenuProps) {
   const history = useHistory();
-  const { user } = useContext(AppCtxt);
+  const { user, setUserData } = useContext(AppCtxt);
   return (
     <IonMenu
       side={lang === "ar" ? "end" : "start"}
@@ -48,7 +48,7 @@ export default function AppMenu({ lang }: AppMenuProps) {
       <IonContent style={{ direction: lang === "ar" ? "rtl" : "ltr" }}>
         <IonMenuToggle>
           <IonList>
-            {!user.Id && (
+            {!user?.Id && (
               <IonItem routerLink="/" routerDirection="root">
                 <IonIcon slot="start" icon={homeOutline} color="tertiary" />
                 <IonLabel>{strings.main.home}</IonLabel>
@@ -113,9 +113,10 @@ export default function AppMenu({ lang }: AppMenuProps) {
               <IonItem
                 onClick={() => {
                   // Log out and clear localStorage
+                  setUserData(null);
                   localStorage.clear();
                   history.replace("/");
-                  window.location.reload(false);
+                  // window.location.reload(false);
                 }}
               >
                 <IonIcon slot="start" icon={logOutOutline} color="tertiary" />

@@ -8,7 +8,6 @@ import { AppCtxt } from "../Context";
 import { UserType } from "../types/types";
 import Axios from "axios";
 import config from "../config";
-import { Plugins, Capacitor } from "@capacitor/core";
 
 //import ExploreContainer from "../components/ExploreContainer";
 
@@ -18,23 +17,24 @@ const Home: React.FC = () => {
   const { loggedIn, setUserData } = useContext(AppCtxt);
 
   // Listener back-button
+  /*
   useEffect(() => {
     if (Capacitor.isNative) {
       Plugins.App.addListener("backButton", (e) => {
         // Use of location.pathname is also correct
         if (
           window.location.pathname === "/" ||
-          window.location.pathname === "/home"
+          window.location.pathname === "/home" ||
+          window.location.pathname === "/user_home"
         ) {
           Plugins.App.exitApp();
-        } else if (window.location.pathname === "/detail") {
-          history.push("/");
         } else {
           history.goBack();
         }
       });
     }
-  }, []);
+  }, [history]);
+  */
 
   // TODO : no internet [later]
   useEffect(() => {
@@ -61,9 +61,9 @@ const Home: React.FC = () => {
       userLogin();
     } else if (localStorage.getItem("UserData")) {
       // will get to here if user got updated
-      history.push("/user_home");
+      history.replace("/user_home");
     }
-  }, [history, loggedIn]);
+  }, [history, loggedIn, setUserData]);
 
   /*
   useEffect(() => {

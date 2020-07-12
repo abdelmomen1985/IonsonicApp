@@ -26,6 +26,7 @@ const hi = {
     show: "प्रदर्शन",
     save: "सहेजें",
     success_redeem: "Redeem Done Successfuly !",
+    posted_successfuly: "Posted Successfuly !",
   },
   slider: {
     next: "आगे",

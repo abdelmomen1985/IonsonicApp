@@ -13,13 +13,28 @@ import { AppCtxt } from "../Context";
 import { NewsType } from "../types/types";
 import config from "../config";
 import EveryHeader from "../components/EveryHeader";
+import Axios from "axios";
+import { getLangId } from "../utils/functions";
 
 export default function NewsAndTips() {
   const { currentLang } = useContext(AppCtxt);
 
   const [news, setNews] = useState<NewsType[]>([]);
   useEffect(() => {
-    setNews(config.fakeAPI.news as NewsType[]);
+    const getNews = async () => {
+      const langId = getLangId(currentLang!);
+      let resp = await Axios.get(
+        `${config.API_URL}ManageCustomer/GetAllNews?LanguageId=${langId}&CountryId=0`
+      );
+      const { Data } = resp.data;
+
+      if (Data && resp.status === 200) {
+        console.log(Data);
+        setNews(Data);
+      }
+    };
+    getNews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -43,7 +58,12 @@ export default function NewsAndTips() {
       <IonContent className="notifications-home-bg ion-padding">
         {news.map((single) => (
           <IonCard className="ion-margin" key={single.Id}>
-            <img src={single.Images[0].Image} alt="" />
+            {single.NewsImages?.length > 0 && (
+              <img
+                src={single.NewsImages[single.NewsImages.length - 1].Image}
+                alt=""
+              />
+            )}
             <IonCardTitle className="ion-padding">
               {currentLang === "ar" ? single.TitleAr : single.TitleEn}
             </IonCardTitle>

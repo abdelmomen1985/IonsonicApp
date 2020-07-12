@@ -34,7 +34,7 @@ export default function UserCard() {
           className="card card-box ion-padding-top "
           style={{
             background: `url(${goldCard}) no-repeat center center / cover`,
-            backgroundImage: imageSwitch(user.type),
+            backgroundImage: imageSwitch(user?.type!),
             borderRadius: "12px",
             marginTop: "10vh",
           }}
@@ -44,7 +44,7 @@ export default function UserCard() {
             color="light"
             style={{ fontSize: "1.2em", textTransform: "capitalize" }}
           >
-            {user.type}
+            {user?.type}
           </IonText>
           <div
             className="ion-text-center "
@@ -67,7 +67,7 @@ export default function UserCard() {
           >
             <img
               className="barcode ion-text-center"
-              src={`https://barcode.tec-it.com/barcode.ashx?data=pana000${user.Id}`}
+              src={`https://barcode.tec-it.com/barcode.ashx?data=pana000${user?.Id}`}
               alt=""
               style={{ width: "90%", maxHeight: "70px" }}
             />
@@ -81,7 +81,7 @@ export default function UserCard() {
 
           <div className="ion-padding-bottom ion-margin-top ion-text-center">
             <IonText color="light" style={{ fontSize: "larger" }}>
-              {user.FirstName} {user.LastName}
+              {user?.FirstName} {user?.LastName}
             </IonText>
           </div>
           <div></div>

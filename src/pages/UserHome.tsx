@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   IonContent,
   IonMenuToggle,
@@ -20,31 +20,69 @@ import ContactModal from "../components/ContactModal";
 import { RefresherEventDetail } from "@ionic/core";
 import Axios from "axios";
 import config from "../config";
-import { radioButtonOff, radioButtonOnOutline } from "ionicons/icons";
+import { radioButtonOnOutline } from "ionicons/icons";
+import { UserType } from "../types/types";
 
 export default function UserHome() {
   const { currentLang, user, setUserData } = useContext(AppCtxt);
   const [modalOpen, setModalOpen] = useState(false);
+
   const doRefresh = async (event: CustomEvent<RefresherEventDetail>) => {
+    /*
     let resp = await Axios.post(`${config.API_URL}ManageAccount/Login`, {
-      email: user.Email,
-      password: user.Password,
+      email: user?.Email,
+      password: user?.Password,
     });
     const { Data } = resp.data;
     if (Data?.Status === 200) setUserData(Data.User);
     console.log(Data);
+    */
+    let resp = await Axios.get(
+      `${config.API_URL}ManageCustomer/CustomerPoints?CustId=${user?.Id}`
+    );
+    const { Data } = resp.data;
+
+    if (Data && resp.status === 200) {
+      console.log(Data);
+      let userData = { ...user } as UserType;
+      userData.active = +Data.AddPoint > 0;
+      userData.walts = Data.RemainPoint;
+      setUserData(userData);
+    }
     event.detail.complete();
   };
+
+  useEffect(() => {
+    const getPoints = async () => {
+      let resp = await Axios.get(
+        `${config.API_URL}ManageCustomer/CustomerPoints?CustId=${user?.Id}`
+      );
+      const { Data } = resp.data;
+
+      if (Data && resp.status === 200) {
+        console.log(Data);
+        let userData = { ...user } as UserType;
+        userData.active = +Data.AddPoint > 0;
+        userData.walts = Data.RemainPoint;
+        setUserData(userData);
+      }
+    };
+    getPoints();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      <ContactModal
-        contactTypeId={3}
-        onSubmit={() => {}}
-        open={modalOpen}
-        onToggModal={(open) => {
-          setModalOpen(open);
-        }}
-      />
+      {user?.Id && (
+        <ContactModal
+          contactTypeId={3}
+          onSubmit={() => {}}
+          open={modalOpen}
+          onToggModal={(open) => {
+            setModalOpen(open);
+          }}
+        />
+      )}
       <IonPage style={{ direction: currentLang === "ar" ? "rtl" : "ltr" }}>
         {user?.Id && (
           <IonContent className="user-home-bg">
@@ -80,7 +118,7 @@ export default function UserHome() {
                     {strings.user.account_status}{" "}
                   </IonText>
                   <span>&nbsp;</span>
-                  {user.walts ? (
+                  {user.active ? (
                     <>
                       <IonIcon icon={radioButtonOnOutline} color="success" />
                       <span>&nbsp;</span>

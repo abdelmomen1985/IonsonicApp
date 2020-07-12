@@ -27,7 +27,7 @@ export default function Profile() {
     const files = e.target.files;
     // this.setState({ uploading: true })
     const formData = new FormData();
-    formData.append("userId", "" + user.Id);
+    formData.append("userId", "" + user?.Id);
     if (files) {
       console.log("inside files");
       let i = 0;
@@ -120,7 +120,7 @@ export default function Profile() {
               style={{ minWidth: "50%", height: "100%" }}
             >
               <div className="imglabel-wrap">
-                {user.ProfileImage ? (
+                {user?.ProfileImage ? (
                   <img
                     src={user.ProfileImage}
                     alt=""
@@ -152,23 +152,23 @@ export default function Profile() {
             <IonLabel color="primary"> {strings.user.name} </IonLabel>
             <IonText>
               {" "}
-              {user.FirstName} {user.LastName}
+              {user?.FirstName} {user?.LastName}
             </IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.phone} </IonLabel>
-            <IonText dir="ltr"> {user.Phone} </IonText>
+            <IonText dir="ltr"> {user?.Phone} </IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.email} </IonLabel>
-            <IonText> {user.Email} </IonText>
+            <IonText> {user?.Email} </IonText>
           </IonItem>
 
           <IonItem>
             <IonLabel color="primary"> {strings.user.residency} </IonLabel>
-            <IonText> {user.ResidencyId}</IonText>
+            <IonText> {user?.ResidencyId}</IonText>
           </IonItem>
 
           <IonItem>
@@ -180,8 +180,8 @@ export default function Profile() {
             <IonLabel color="primary">{strings.user.material_status}</IonLabel>
             <IonText>
               {currentLang === "ar"
-                ? getMaritalStatus(user.MaterialStatusId).ar_name
-                : getMaritalStatus(user.MaterialStatusId).en_name}
+                ? getMaritalStatus(user?.MaterialStatusId!).ar_name
+                : getMaritalStatus(user?.MaterialStatusId!).en_name}
             </IonText>
           </IonItem>
         </IonList>

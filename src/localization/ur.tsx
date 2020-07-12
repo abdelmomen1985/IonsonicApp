@@ -26,6 +26,7 @@ const ur = {
     show: "دکھائیں",
     save: "محفوظ کریں",
     success_redeem: "Redeem Done Successfuly !",
+    posted_successfuly: "Posted Successfuly !",
   },
   slider: {
     next: "اگلے",

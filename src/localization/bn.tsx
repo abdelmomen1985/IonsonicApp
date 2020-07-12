@@ -26,6 +26,7 @@ const bn = {
     show: "প্রদর্শনী",
     save: "সংরক্ষণ",
     success_redeem: "Redeem Done Successfuly !",
+    posted_successfuly: "Posted Successfuly !",
   },
   slider: {
     next: "পরবর্তী",

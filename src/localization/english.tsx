@@ -26,6 +26,7 @@ const english = {
     show: "Show",
     save: "Save",
     success_redeem: "Redeem Done Successfuly !",
+    posted_successfuly: "Posted Successfuly !",
   },
   slider: {
     next: "Next",

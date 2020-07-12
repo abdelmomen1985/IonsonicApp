@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import React, { useContext } from "react";
+import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
@@ -48,6 +48,25 @@ import EditProfile from "./pages/EditProfile";
 const App: React.FC = () => {
   const { currentLang } = useContext(AppCtxt);
   // first check user lang
+  /*
+  useEffect(() => {
+    if (Capacitor.isNative) {
+      Plugins.App.addListener("backButton", (e) => {
+        // Use of location.pathname is also correct
+        if (
+          window.location.pathname === "/" ||
+          window.location.pathname === "/home" ||
+          window.location.pathname === "/user_home"
+        ) {
+          //Plugins.App.exitApp();
+          bugy("Will Exit APP");
+        } else {
+          bugy("Nothing TO DO");
+        }
+      });
+    }
+  }, []);
+  */
 
   return (
     <IonApp>

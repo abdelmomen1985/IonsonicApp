@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { CtxtProvider } from "./Context";
 import { Plugins } from "@capacitor/core";
-const { App } = Plugins;
+import { bugy } from "./utils/functions";
 
 ReactDOM.render(<CtxtProvider />, document.getElementById("root"));
 
@@ -12,15 +12,20 @@ ReactDOM.render(<CtxtProvider />, document.getElementById("root"));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-/*
 document.addEventListener("ionBackButton", (ev: any) => {
-  const routerEl = document.querySelector("ion-router");
-  ev.detail.register(10, () => {
-    const path = window.location.pathname;
-    console.log(path, routerEl?.root, "Home");
-    if (path === routerEl?.root) {
-      App.exitApp();
+  if (window.location.pathname === "/user_home") {
+    ev.detail.register(1, () => {
+      bugy("user_home back pressed");
+    });
+  }
+
+  ev.detail.register(-1, () => {
+    console.log("ionBackButton pressed in path:", window.location.pathname);
+    if (
+      window.location.pathname === "/" ||
+      window.location.pathname === "/home"
+    ) {
+      Plugins.App.exitApp();
     }
   });
 });
-*/

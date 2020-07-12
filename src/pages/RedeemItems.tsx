@@ -22,14 +22,14 @@ import { RouteComponentProps } from "react-router";
 import EveryHeader from "../components/EveryHeader";
 import { getLangId } from "../utils/functions";
 import config from "../config";
-import { GiftItem } from "../types/types";
+import { GiftItem, UserType } from "../types/types";
 import moment from "moment";
 import { bulbOutline } from "ionicons/icons";
 import voucherImg from "../images/voucher.png";
 import Axios from "axios";
 
 export default function RedeemItems({ match }: RouteComponentProps) {
-  const { currentLang, user } = useContext(AppCtxt);
+  const { currentLang, user, setUserData } = useContext(AppCtxt);
   const { what } = match.params as any;
   const [items, setItems] = useState<GiftItem[]>([]);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
@@ -42,7 +42,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
 
     const resp = await Axios.post(
       `${config.API_URL}ManageCustomer/${endPoint}`,
-      { UserID: user.Id, VoucherId: item.id, GiftId: item.id }
+      { UserID: user?.Id, VoucherId: item.id, GiftId: item.id }
     );
     let { Data } = await resp.data;
     if (Data.Status === 200) {
@@ -57,6 +57,18 @@ export default function RedeemItems({ match }: RouteComponentProps) {
       }
       */
       setShowSuccessToast(true);
+      // Now refresh the user watts
+      let resp = await Axios.get(
+        `${config.API_URL}ManageCustomer/CustomerPoints?CustId=${user?.Id}`
+      );
+      const { Data } = resp.data;
+
+      if (Data && resp.status === 200) {
+        console.log(Data);
+        let userData = { ...user } as UserType;
+        userData.walts = Data.RemainPoint;
+        setUserData(userData);
+      }
     }
   };
 
@@ -65,7 +77,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
       const langId = getLangId(currentLang!);
       if (what === "gifts") {
         let resp = await fetch(
-          `${config.API_URL}ManageCustomer/GetAllUserGifts?LanguageId=${langId}&UserId=${user.Id}&CountryId=0`
+          `${config.API_URL}ManageCustomer/GetAllUserGifts?LanguageId=${langId}&UserId=${user?.Id}&CountryId=0`
         );
         let { Data } = await resp.json();
         console.log(Data?.GiftList);
@@ -94,7 +106,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
         setItems(items);
       } else if (what === "vouchers") {
         let resp = await fetch(
-          `${config.API_URL}ManageCustomer/GetAllUserVouchers?LanguageId=${langId}&UserId=${user.Id}&CountryId=0`
+          `${config.API_URL}ManageCustomer/GetAllUserVouchers?LanguageId=${langId}&UserId=${user?.Id}&CountryId=0`
         );
         let { Data } = await resp.json();
         console.log(Data);
@@ -143,7 +155,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
           >
             <IonIcon icon={bulbOutline} />
             <IonLabel>
-              {strings.watts.available} : {user.walts}
+              {strings.watts.available} : {user?.walts}
             </IonLabel>
           </IonChip>
         </div>
@@ -165,7 +177,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
                       </IonCardSubtitle>
                       <IonButton
                         onClick={() => redeemItem(item)}
-                        disabled={+user.walts < +item.walts}
+                        disabled={+user?.walts! < +item.walts}
                       >
                         {strings.main.redeem}
                       </IonButton>

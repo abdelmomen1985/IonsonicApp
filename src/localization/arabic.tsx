@@ -26,6 +26,7 @@ const arabic = {
     show: "عـرض",
     save: "حفظ",
     success_redeem: "تم الاستبدال بنجاح",
+    posted_successfuly: "تم الارسال بنجاح",
   },
   slider: {
     next: "التالي",
