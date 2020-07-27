@@ -62,8 +62,11 @@ const Home: React.FC = () => {
     } else if (localStorage.getItem("UserData")) {
       // will get to here if user got updated
       history.replace("/user_home");
+    } else if (localStorage.getItem("OTP_PHONE")) {
+      history.replace("/otp");
     }
-  }, [history, loggedIn, setUserData]);
+    console.log("My Home");
+  }, [loggedIn]);
 
   /*
   useEffect(() => {
@@ -85,12 +88,11 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       */}
-      {!userData && (
-        <IonContent className="land-bg" id="main-content">
-          {" "}
-          <LandingSelect />
-        </IonContent>
-      )}
+
+      <IonContent className="land-bg" id="main-content">
+        {" "}
+        <LandingSelect />
+      </IonContent>
 
       {/*
         <IonHeader collapse="condense">

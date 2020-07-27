@@ -74,6 +74,7 @@ export default function Profile() {
   const editProfile = async () => {
     history.push("/edit_profile");
   };
+
   return (
     <IonPage
       style={{
@@ -95,7 +96,11 @@ export default function Profile() {
         </IonToolbar>
       </IonHeader>
       */}
-      <EveryHeader title={strings.menu.profile} backInstead={true}>
+      <EveryHeader
+        title={strings.menu.profile}
+        backInstead={true}
+        backPush="/user_home"
+      >
         <IonIcon
           icon={createOutline}
           color="light"
@@ -103,89 +108,93 @@ export default function Profile() {
           onClick={editProfile}
         />
       </EveryHeader>
-      <IonContent>
-        <div
-          className="ion-text-center"
-          style={{ maxHeight: "25vh", overflow: "hidden" }}
-        >
+      {user && (
+        <IonContent>
           <div
-            className="avatar-img"
-            style={{
-              border: "4px solid #efd5d5",
-              boxShadow: "1px 2px 2px rgba(182, 30, 30, 0.3)",
-            }}
+            className="ion-text-center"
+            style={{ maxHeight: "25vh", overflow: "hidden" }}
           >
-            <label
-              htmlFor="file-input"
-              style={{ minWidth: "50%", height: "100%" }}
+            <div
+              className="avatar-img"
+              style={{
+                border: "4px solid #efd5d5",
+                boxShadow: "1px 2px 2px rgba(182, 30, 30, 0.3)",
+              }}
             >
-              <div className="imglabel-wrap">
-                {user?.ProfileImage ? (
-                  <img
-                    src={user.ProfileImage}
-                    alt=""
-                    style={{ maxWidth: "140%", borderRadius: "50%" }}
-                  />
-                ) : (
-                  <img
-                    src={avatarImg}
-                    alt=""
-                    style={{ maxWidth: "140%", borderRadius: "50%" }}
-                  />
-                )}
-                <div className="change-img">
-                  <IonIcon icon={cameraOutline} color="dark" />
+              <label
+                htmlFor="file-input"
+                style={{ minWidth: "50%", height: "100%" }}
+              >
+                <div className="imglabel-wrap">
+                  {user?.ProfileImage ? (
+                    <img
+                      src={user.ProfileImage}
+                      alt=""
+                      style={{ maxWidth: "140%", borderRadius: "50%" }}
+                    />
+                  ) : (
+                    <img
+                      src={avatarImg}
+                      alt=""
+                      style={{ maxWidth: "140%", borderRadius: "50%" }}
+                    />
+                  )}
+                  <div className="change-img">
+                    <IonIcon icon={cameraOutline} color="dark" />
+                  </div>
                 </div>
-              </div>
-            </label>
+              </label>
 
-            <input
-              type="file"
-              id="file-input"
-              className="hidden-file-input"
-              onChange={changeImage}
-            />
+              <input
+                type="file"
+                id="file-input"
+                className="hidden-file-input"
+                onChange={changeImage}
+              />
+            </div>
           </div>
-        </div>
-        <IonList>
-          <IonItem>
-            <IonLabel color="primary"> {strings.user.name} </IonLabel>
-            <IonText>
-              {" "}
-              {user?.FirstName} {user?.LastName}
-            </IonText>
-          </IonItem>
+          <IonList>
+            <IonItem>
+              <IonLabel color="primary"> {strings.user.name} </IonLabel>
+              <IonText>
+                {" "}
+                {user?.FirstName} {user?.LastName}
+              </IonText>
+            </IonItem>
 
-          <IonItem>
-            <IonLabel color="primary"> {strings.user.phone} </IonLabel>
-            <IonText dir="ltr"> {user?.Phone} </IonText>
-          </IonItem>
+            <IonItem>
+              <IonLabel color="primary"> {strings.user.phone} </IonLabel>
+              <IonText dir="ltr"> {user?.Phone} </IonText>
+            </IonItem>
 
-          <IonItem>
-            <IonLabel color="primary"> {strings.user.email} </IonLabel>
-            <IonText> {user?.Email} </IonText>
-          </IonItem>
+            <IonItem>
+              <IonLabel color="primary"> {strings.user.email} </IonLabel>
+              <IonText> {user?.Email} </IonText>
+            </IonItem>
 
-          <IonItem>
-            <IonLabel color="primary"> {strings.user.residency} </IonLabel>
-            <IonText> {user?.ResidencyId}</IonText>
-          </IonItem>
+            <IonItem>
+              <IonLabel color="primary"> {strings.user.residency} </IonLabel>
+              <IonText> {user?.ResidencyId}</IonText>
+            </IonItem>
 
-          <IonItem>
-            <IonLabel color="primary"> {strings.user.city} </IonLabel>
-            <IonText>{localStorage.getItem("CityName")}</IonText>
-          </IonItem>
+            <IonItem>
+              <IonLabel color="primary"> {strings.user.city} </IonLabel>
+              <IonText>{localStorage.getItem("CityName")}</IonText>
+            </IonItem>
 
-          <IonItem>
-            <IonLabel color="primary">{strings.user.material_status}</IonLabel>
-            <IonText>
-              {currentLang === "ar"
-                ? getMaritalStatus(user?.MaterialStatusId!).ar_name
-                : getMaritalStatus(user?.MaterialStatusId!).en_name}
-            </IonText>
-          </IonItem>
-        </IonList>
-      </IonContent>
+            <IonItem>
+              <IonLabel color="primary">
+                {strings.user.material_status}
+              </IonLabel>
+              <IonText>
+                {currentLang === "ar"
+                  ? getMaritalStatus(user?.MaterialStatusId!).ar_name
+                  : getMaritalStatus(user?.MaterialStatusId!).en_name}
+              </IonText>
+            </IonItem>
+          </IonList>
+        </IonContent>
+      )}
 
       <Footer current="user_home" />
     </IonPage>

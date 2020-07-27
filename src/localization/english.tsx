@@ -27,6 +27,10 @@ const english = {
     save: "Save",
     success_redeem: "Redeem Done Successfuly !",
     posted_successfuly: "Posted Successfuly !",
+    verify: "Verify using OTP !",
+    verify_text: "We have sent a verification number to this phone",
+    verify_enter: "Enter number here",
+    verify_error: "The code you've entered is not Correct !",
   },
   slider: {
     next: "Next",
@@ -40,6 +44,10 @@ const english = {
     should_select_marital_status: "Should Select Marital Status",
     user_must_be_older_than_18_years: "User must be older than 18 years",
     email_error: "Email Was Registered ",
+    forgot_password: "Forgot password ?",
+    resend_code: "Resend Code ?",
+    no_phone_error: "This phone number is not registered !",
+    phone_error: "Phone is already registered",
     register_done_successfuly:
       "Register Done Successfuly, You will be redirected to login page",
   },

@@ -88,7 +88,7 @@ export default function EditProfile() {
       let { Data } = resp.data;
       if (Data && Data.Status === 200) {
         setUserData(Data.User);
-        history.goBack();
+        history.push("/profile");
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -157,6 +157,7 @@ export default function EditProfile() {
                 name="residencyId"
                 value={residencyId}
                 required
+                pattern="[0-9]{10}"
                 onIonChange={(e) => setResidencyId(e.detail.value!)}
                 className="reg-input"
                 placeholder={strings.user.residency}

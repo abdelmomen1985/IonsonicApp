@@ -54,6 +54,10 @@ export default function UserHome() {
 
   useEffect(() => {
     const getPoints = async () => {
+      let user = localStorage.getItem("UserData")
+        ? (JSON.parse(localStorage.getItem("UserData")!) as UserType)
+        : null;
+
       let resp = await Axios.get(
         `${config.API_URL}ManageCustomer/CustomerPoints?CustId=${user?.Id}`
       );

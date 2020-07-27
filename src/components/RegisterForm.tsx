@@ -1,4 +1,4 @@
-import React, { useState, useCallback, SyntheticEvent, useEffect } from "react";
+import React, { useState, useCallback, SyntheticEvent } from "react";
 import {
   IonDatetime,
   IonSelect,
@@ -54,18 +54,17 @@ export default function RegisterForm() {
         return;
       }
 
+      if (!birthDate.value || moment(birthDate.value).year() > 2002) {
+        setValidationErrors({ user_must_be_older_than_18_years: true });
+        return;
+      }
+
       if (!materialStatusId.value) {
         // First will remove old
         setValidationErrors({ should_select_marital_status: true });
         return;
       }
 
-      if (!birthDate.value || moment(birthDate.value).year() > 2002) {
-        setValidationErrors({ user_must_be_older_than_18_years: true });
-        return;
-      }
-
-      console.log("Will Reg");
       const newUser = {
         FirstName: name.value,
         LastName: " ",
@@ -88,8 +87,14 @@ export default function RegisterForm() {
       if (Data.Status === 400 && Data.Message.Email) {
         setValidationErrors({ email_error: true });
         return;
+      } else if (Data.Status === 400 && Data.Message.Phone) {
+        setValidationErrors({ phone_error: true });
       } else if (Data.Status === 200) {
         // Success Logic Goes here
+        await Axios.post(`${config.API_URL}ManageAccount/ForgetPassword`, {
+          mobile: newUser.Phone,
+        });
+        localStorage.setItem("OTP_PHONE", newUser.Phone);
         setShowSuccessToast(true);
       }
       console.log(Data);
@@ -102,7 +107,7 @@ export default function RegisterForm() {
         isOpen={showSuccessToast}
         onDidDismiss={() => {
           setShowSuccessToast(false);
-          history.push("/login");
+          history.push("/otp");
         }}
         message={strings.login.register_done_successfuly}
         position="middle"
@@ -170,6 +175,12 @@ export default function RegisterForm() {
         </div>
 
         <div className="reg-element">
+          {validationErrors?.phone_error && (
+            <IonChip color="danger" style={{ backgroundColor: "#dedede" }}>
+              <IonIcon icon={alertCircleOutline} />
+              <IonLabel>{strings.login.phone_error}</IonLabel>
+            </IonChip>
+          )}
           <IonInput
             type="tel"
             name="phone"
@@ -184,8 +195,13 @@ export default function RegisterForm() {
           <IonInput
             type="text"
             name="residencyId"
+            id="residencyId"
             required
-            min="5"
+            pattern="[0-9]{10}"
+            onInvalid={(e: React.FormEvent<HTMLIonInputElement>) => {
+              // Just show the custom error console.log("onInvalid");
+              // Do onChange instead ! https://www.w3schools.com/jsref/event_oninvalid.asp
+            }}
             className="reg-input"
             placeholder={strings.user.residency}
           />

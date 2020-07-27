@@ -36,7 +36,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
 
   const redeemItem = async (item: GiftItem) => {
     console.log(item);
-
+    /*
     let endPoint = item.type === "gift" ? "RedeemGift" : "";
     endPoint = item.type === "voucher" ? "RedeemVoucher" : endPoint;
 
@@ -44,18 +44,25 @@ export default function RedeemItems({ match }: RouteComponentProps) {
       `${config.API_URL}ManageCustomer/${endPoint}`,
       { UserID: user?.Id, VoucherId: item.id, GiftId: item.id }
     );
+    */
+    let typeId = item.type === "gift" ? 1 : 0;
+    typeId = item.type === "voucher" ? 2 : typeId;
+    typeId = item.type === "p_product" ? 3 : typeId;
+
+    let sendData = {
+      CustomerId: "" + user?.Id,
+      RequestId: "" + item.id,
+      TypeId: "" + typeId,
+    };
+    console.log(sendData);
+    const resp = await Axios.post(
+      `${config.API_URL}ManageCustomer/Redeem`,
+      sendData
+    );
+    console.log(resp);
+
     let { Data } = await resp.data;
     if (Data.Status === 200) {
-      // Do the logic
-      /*
-      console.log(Data);
-      if(item.type === "gift") {
-        //localStorage.setItem("Redeemed",)
-        let redeemedItemsStorage = localStorage.getItem("rd_gifts") ? JSON.parse(""+localStorage.getItem("rd_gifts")) : [] as any[];
-        redeemedItemsStorage.gifts = redeemedItemsStorage.gifts ? redeemedItemsStorage.gifts : []
-        redeemedItemsStorage.gifts.push(item.id)
-      }
-      */
       setShowSuccessToast(true);
       // Now refresh the user watts
       let resp = await Axios.get(
@@ -120,7 +127,7 @@ export default function RedeemItems({ match }: RouteComponentProps) {
       }
     };
     getItems();
-  }, [what, user, currentLang, showSuccessToast]);
+  }, [what, currentLang, showSuccessToast]);
 
   return (
     <IonPage style={{ direction: currentLang === "ar" ? "rtl" : "ltr" }}>

@@ -44,6 +44,9 @@ import NewsAndTips from "./pages/NewsAndTips";
 import UserCard from "./pages/UserCard";
 import RedeemItems from "./pages/RedeemItems";
 import EditProfile from "./pages/EditProfile";
+import OTPPage from "./pages/OTPPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import ChangePassword from "./components/ChangePassword";
 
 const App: React.FC = () => {
   const { currentLang } = useContext(AppCtxt);
@@ -80,8 +83,11 @@ const App: React.FC = () => {
             <Route path="/register" component={Register} />
             <Route path="/out" component={LoggedOut} />
             <Route path="/login" component={Login} />
+            <Route path="/otp" component={OTPPage} />
+            <Route path="/forgot" component={ForgotPassword} />
             <Route path="/welcome" component={Welcome} />
             <Route path="/user_home" component={UserHome} />
+            <Route path="/change_password" component={ChangePassword} />
             <Route path="/user_card" component={UserCard} />
             <Route path="/offers" component={Offers} />
             <Route path="/branches" component={BranchesMap} />

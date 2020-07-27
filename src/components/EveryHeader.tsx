@@ -16,12 +16,14 @@ import { useHistory } from "react-router-dom";
 interface EveryHeaderProps {
   title: string;
   backInstead?: boolean;
+  backPush?: string;
   children?: ReactChild | ReactChildren;
 }
 
 export default function EveryHeader({
   title,
   backInstead,
+  backPush,
   children,
 }: EveryHeaderProps) {
   const { currentLang } = useContext(AppCtxt);
@@ -35,7 +37,8 @@ export default function EveryHeader({
               icon={currentLang === "ar" ? arrowForwardSharp : arrowBackSharp}
               style={{ fontSize: "1.2em" }}
               onClick={() => {
-                history.goBack();
+                if (backPush) history.push(backPush);
+                else history.goBack();
               }}
             />
           ) : (

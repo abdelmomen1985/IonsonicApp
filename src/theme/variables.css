@@ -570,6 +570,15 @@ ion-toolbar.profile-toolbar {
   width: 0px;
 }
 
+.inputStyle {
+  width: 4rem !important;
+  height: 5.5rem;
+  margin: 0 0.5rem;
+  font-size: 2rem;
+  border-radius: 6px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
 ::placeholder {
   color: #f0e6e6;
   opacity: 0.9; /* Firefox */

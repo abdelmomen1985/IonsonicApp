@@ -12,13 +12,14 @@ import {
   IonChip,
   IonIcon,
   IonLabel,
+  IonText,
+  IonRouterLink,
 } from "@ionic/react";
 import manaraLogo from "../images/manara_txt_logo.png";
 import { strings } from "../localization/localization";
 import config from "../config";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
-import { bugy } from "../utils/functions";
 import { alertCircleOutline } from "ionicons/icons";
 import { AppCtxt } from "../Context";
 
@@ -93,6 +94,14 @@ export default function Login() {
               </IonButton>
             </div>
           </form>
+
+          <div className="ion-margin-top ion-text-center">
+            <IonRouterLink routerLink="/forgot">
+              <IonText color="light" style={{ fontSize: "1.1em" }}>
+                {strings.login.forgot_password}
+              </IonText>
+            </IonRouterLink>
+          </div>
         </div>
       </IonContent>
     </IonPage>

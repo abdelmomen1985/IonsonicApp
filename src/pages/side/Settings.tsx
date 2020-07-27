@@ -45,7 +45,21 @@ export default function Settings() {
           >
             {strings.main.change_langauge}
           </IonButton>
+          <div className="ion-text-center ion-margin-top">
+            <br />
+          </div>
+          <IonButton
+            routerLink="/change_password"
+            type="button"
+            expand="block"
+            color="light"
+            size="large"
+            className="light-btn ion-margin-top"
+          >
+            {strings.main.change} {strings.user.password}
+          </IonButton>
         </div>
+
         <Footer current="" />
       </IonPage>
     </>

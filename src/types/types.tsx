@@ -106,3 +106,10 @@ export type NewsType = {
 
   NewsImages: [{ Image: string }];
 };
+
+export type UserTransType = {
+  TypeId: string;
+  PointCount: string;
+  Date: string;
+  ActionId: string;
+};

@@ -18,7 +18,6 @@ import { getLangId } from "../utils/functions";
 
 export default function NewsAndTips() {
   const { currentLang } = useContext(AppCtxt);
-
   const [news, setNews] = useState<NewsType[]>([]);
   useEffect(() => {
     const getNews = async () => {
