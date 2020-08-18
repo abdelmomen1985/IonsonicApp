@@ -57,12 +57,14 @@ export default function ChangePassword() {
         }
       );
       let { Data } = resp.data;
-
+      console.log(Data);
       if (Data.Status === 200) {
         // Success Logic Goes here
         localStorage.removeItem("UserEmail");
         localStorage.removeItem("OTP_FORGOT");
-        setUserData(Data.User);
+        if (user?.Id) {
+          setUserData(Data.User);
+        }
         setShowSuccessToast(true);
       }
     },

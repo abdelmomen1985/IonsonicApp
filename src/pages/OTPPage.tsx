@@ -42,6 +42,7 @@ const OTPPage: React.FC = () => {
     });
     let { Data } = resp.data;
     console.log(Data);
+    setOtp("");
 
     if (Data.Status === 400) {
       setError(strings.main.verify_error);
