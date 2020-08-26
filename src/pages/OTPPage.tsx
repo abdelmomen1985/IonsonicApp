@@ -52,7 +52,8 @@ const OTPPage: React.FC = () => {
     if (phone.length === 9 && phone.charAt(0) !== "0") phone = "0" + phone;
     phone = phone.substr(-10);
     */
-    phone = phone.substr(-9);
+    if (userCountry === "eg") phone = phone.substr(-10);
+    else phone = phone.substr(-9);
     phone = "0" + phone;
     phone = countryCode + phone;
     setPhone(phone);
@@ -78,7 +79,6 @@ const OTPPage: React.FC = () => {
     formData.append("ResidencyId", newUser.ResidencyId);
     formData.append("MaterialStatusId", "" + newUser.MaterialStatusId);
     formData.append("Image", "" + newUser.ProfileImage);
-    /*
     const resp = await Axios.post(
       `${config.API_URL}ManageCustomer/UpdateCustomer`,
       formData,
@@ -94,7 +94,6 @@ const OTPPage: React.FC = () => {
       // now resend code
       await resendCode(phone);
     }
-    */
     bugy(phone);
     bugy(displayPhone);
   };
@@ -127,9 +126,11 @@ const OTPPage: React.FC = () => {
   };
 
   useEffect(() => {
-    let newphone = phone.substr(-9);
-    newphone = countryCode + newphone;
-    setDisplayPhone(newphone);
+    if (userCountry !== "eg") {
+      let newphone = phone.substr(-9);
+      newphone = countryCode + newphone;
+      setDisplayPhone(newphone);
+    } else setDisplayPhone(phone);
   }, [phone]);
 
   useEffect(() => {

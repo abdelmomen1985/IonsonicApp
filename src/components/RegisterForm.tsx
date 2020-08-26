@@ -79,7 +79,9 @@ export default function RegisterForm() {
       // then get last 10
       */
       // get only last 9 chars
-      userPhone = userPhone.substr(-9);
+      if (userCountry === "eg") userPhone = userPhone.substr(-10);
+      else userPhone = userPhone.substr(-9);
+
       userPhone = "0" + userPhone;
       userPhone = countryCode + userPhone;
 
@@ -112,7 +114,7 @@ export default function RegisterForm() {
       } else if (Data.Status === 200 && Data.User.Id) {
         localStorage.setItem("REG_USER", JSON.stringify(Data.User));
         // Success Logic Goes here
-        /*
+
         let forgetResp = await Axios.post(
           `${config.API_URL}ManageAccount/ForgetPassword`,
           {
@@ -121,7 +123,6 @@ export default function RegisterForm() {
         );
         let { Data: forgetData } = forgetResp.data;
         console.log(forgetData);
-        */
         localStorage.setItem("OTP_PHONE", userPhone);
         setShowSuccessToast(true);
       }
@@ -144,7 +145,7 @@ export default function RegisterForm() {
         duration={1200}
       />
       <form onSubmit={doRegister}>
-        <h2 className="title ion-margin">{strings.user.register} **</h2>
+        <h2 className="title ion-margin">{strings.user.register}</h2>
         <div className="reg-element">
           <IonInput
             type="text"

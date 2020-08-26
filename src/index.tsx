@@ -19,6 +19,12 @@ document.addEventListener("ionBackButton", (ev: any) => {
     });
   }
 
+  if (window.location.pathname === "/otp") {
+    ev.detail.register(1, () => {
+      bugy("otp back pressed");
+    });
+  }
+
   ev.detail.register(-1, () => {
     console.log("ionBackButton pressed in path:", window.location.pathname);
     if (
