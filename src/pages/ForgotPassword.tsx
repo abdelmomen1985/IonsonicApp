@@ -23,17 +23,30 @@ export default function ForgotPassword() {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     console.log(phone);
+    let userCountry = localStorage.getItem("country");
+    let countryCode = "";
+    if (userCountry === "ksa") countryCode = "+966";
+    else if (userCountry === "uae") countryCode = "+971";
+    else if (userCountry === "eg") countryCode = "+20";
+
+    let userPhone = phone;
+    if (userPhone.length === 9 && userPhone.charAt(0) !== "0")
+      userPhone = "0" + userPhone;
+    // get only last 10 chars
+    userPhone = userPhone.substr(-10);
+    userPhone = countryCode + userPhone;
+
     let resp = await Axios.post(
       `${config.API_URL}ManageAccount/ForgetPassword`,
       {
-        mobile: phone,
+        mobile: userPhone,
       }
     );
 
     let { Data } = resp.data;
     if (Data.Status === 200) {
       localStorage.removeItem("OTP_PHONE");
-      localStorage.setItem("OTP_FORGOT", phone);
+      localStorage.setItem("OTP_FORGOT", userPhone);
       history.push("/otp");
     } else {
       setError(strings.login.no_phone_error);

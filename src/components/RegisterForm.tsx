@@ -65,12 +65,30 @@ export default function RegisterForm() {
         return;
       }
 
+      // check user phone
+      let userCountry = localStorage.getItem("country");
+      let countryCode = "";
+      if (userCountry === "ksa") countryCode = "+966";
+      else if (userCountry === "uae") countryCode = "+971";
+      else if (userCountry === "eg") countryCode = "+20";
+
+      let userPhone = phone.value as string;
+      /*
+      if (userPhone.length === 9 && userPhone.charAt(0) !== "0")
+        userPhone = "0" + userPhone;
+      // then get last 10
+      */
+      // get only last 9 chars
+      userPhone = userPhone.substr(-9);
+      userPhone = "0" + userPhone;
+      userPhone = countryCode + userPhone;
+
       const newUser = {
         FirstName: name.value,
         LastName: " ",
         Email: email.value,
         Password: password.value,
-        Phone: phone.value,
+        Phone: userPhone,
         ResidencyId: residencyId.value,
         BirthDate: birthDate.value,
         MaterialStatusId: materialStatusId.value,
@@ -89,18 +107,30 @@ export default function RegisterForm() {
         return;
       } else if (Data.Status === 400 && Data.Message.Phone) {
         setValidationErrors({ phone_error: true });
-      } else if (Data.Status === 200) {
+      } else if (Data.Status === 200 && !Data.User) {
+        setValidationErrors({ residency_error: true });
+      } else if (Data.Status === 200 && Data.User.Id) {
+        localStorage.setItem("REG_USER", JSON.stringify(Data.User));
         // Success Logic Goes here
-        await Axios.post(`${config.API_URL}ManageAccount/ForgetPassword`, {
-          mobile: newUser.Phone,
-        });
-        localStorage.setItem("OTP_PHONE", newUser.Phone);
+        /*
+        let forgetResp = await Axios.post(
+          `${config.API_URL}ManageAccount/ForgetPassword`,
+          {
+            mobile: userPhone,
+          }
+        );
+        let { Data: forgetData } = forgetResp.data;
+        console.log(forgetData);
+        */
+        localStorage.setItem("OTP_PHONE", userPhone);
         setShowSuccessToast(true);
       }
+
       console.log(Data);
     },
     [setShowSuccessToast]
   );
+
   return (
     <div>
       <IonToast
@@ -114,7 +144,7 @@ export default function RegisterForm() {
         duration={1200}
       />
       <form onSubmit={doRegister}>
-        <h2 className="title ion-margin">{strings.user.register}</h2>
+        <h2 className="title ion-margin">{strings.user.register} **</h2>
         <div className="reg-element">
           <IonInput
             type="text"
@@ -185,13 +215,19 @@ export default function RegisterForm() {
             type="tel"
             name="phone"
             required
-            min="8"
+            min="9"
             className="reg-input"
             placeholder={strings.user.phone}
           />
         </div>
 
         <div className="reg-element">
+          {validationErrors?.residency_error && (
+            <IonChip color="danger" style={{ backgroundColor: "#dedede" }}>
+              <IonIcon icon={alertCircleOutline} />
+              <IonLabel>{strings.login.residency_error}</IonLabel>
+            </IonChip>
+          )}
           <IonInput
             type="text"
             name="residencyId"

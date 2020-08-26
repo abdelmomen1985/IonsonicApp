@@ -25,6 +25,7 @@ const arabic = {
     redeem: "استبدال",
     show: "عـرض",
     verify: "التحقق باستخدام OTP",
+    un_verify: "الغاء التحقق",
     save: "حفظ",
     success_redeem: "تم الاستبدال بنجاح",
     posted_successfuly: "تم الارسال بنجاح",
@@ -48,6 +49,7 @@ const arabic = {
     forgot_password: "نسيت كلمة المرور ؟",
     resend_code: "اعادة ارسال الكود",
     no_phone_error: "رقم الهاتف لم يتم تسجيله من قبل",
+    residency_error: "خطأ برقم الاقامة قد تكون مسجلة مسبقاً",
     register_done_successfuly:
       "تم تسجيل المستخدم بنجاح سيتم تحويلك لشاشة تسجيل الدخول",
   },

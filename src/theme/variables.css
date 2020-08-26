@@ -383,6 +383,12 @@ input:-webkit-autofill:active {
   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
 }
 
+.title-colorless {
+  text-align: center;
+  font-family: "Tajawal";
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);
+}
+
 .ctitle {
   font-family: "Tajawal";
   text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.3);

@@ -28,6 +28,7 @@ const english = {
     success_redeem: "Redeem Done Successfuly !",
     posted_successfuly: "Posted Successfuly !",
     verify: "Verify using OTP !",
+    un_verify: " Cancel verification !",
     verify_text: "We have sent a verification number to this phone",
     verify_enter: "Enter number here",
     verify_error: "The code you've entered is not Correct !",
@@ -48,6 +49,7 @@ const english = {
     resend_code: "Resend Code ?",
     no_phone_error: "This phone number is not registered !",
     phone_error: "Phone is already registered",
+    residency_error: "Wrog Residency Id",
     register_done_successfuly:
       "Register Done Successfuly, You will be redirected to login page",
   },
